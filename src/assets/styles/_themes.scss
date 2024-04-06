@@ -1,0 +1,19 @@
+/* Светлая тема */
+.light-theme {
+  --primary-bg-color: var(--white-color);
+  --secondary-bg-color: var(--grayLight-color);
+  --text-color: var(--black-color);
+  --secondary--text-color: var(--gray-color);
+  --link-color: var(--violet-color);
+  --error-color: var(--red-color);
+}
+
+/* Темная тема */
+.dark-theme {
+  --primary-bg-color: var(--black-color);
+  --secondary-bg-color: var(--gray-color);
+  --text-color: var(--white-color);
+  --secondary--text-color: var(--grayLight-color);
+  --link-color: var(--violet-color);
+  --error-color: var(--red-color);
+}

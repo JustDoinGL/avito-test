@@ -1,0 +1,31 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  svg {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    color: #444884;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

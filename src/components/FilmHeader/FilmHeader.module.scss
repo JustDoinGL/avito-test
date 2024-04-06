@@ -1,0 +1,29 @@
+.description__photo {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.poster {
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.description {
+  margin-top: 10px;
+  word-break: break-word;
+  text-indent: 10px;
+}

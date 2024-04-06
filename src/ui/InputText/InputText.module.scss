@@ -1,0 +1,30 @@
+.input {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+
+  background-color: #f7f7f7;
+  color: #333;
+
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    background-color 0.3s;
+  &:focus {
+    border-color: #64b5f6;
+    box-shadow: 0 0 8px rgba(100, 181, 246, 0.5);
+    outline: none;
+    background-color: #fff;
+  }
+  &::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+}

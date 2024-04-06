@@ -1,0 +1,13 @@
+.dark {
+  :global {
+    .ant-rate-star .anticon svg {
+      fill: wheat;
+    }
+    .ant-rate-star-full .anticon svg {
+      fill: gold;
+    }
+    .ant-rate-star-half .ant-rate-star-first .anticon svg {
+      fill: gold;
+    }
+  }
+}

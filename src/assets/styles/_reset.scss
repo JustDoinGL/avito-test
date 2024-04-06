@@ -1,0 +1,97 @@
+// Стили для сброса отступов у основных элементов
+html,
+body,
+p,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+// Стили для сброса списка стилей у списков
+ul,
+ol {
+  list-style: none;
+}
+
+// Стили для сброса таблиц
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// Стили для сброса цитат
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+// Стили для сброса всех элементов форм
+fieldset,
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+// Стили для сброса тега а
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+// Стили для сброса кнопок
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+// Стили для сброса картинок, чтобы они не выходили за контейнер
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Устанавливаем box-sizing для всех элементов
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+  }
