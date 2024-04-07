@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   setCardSkeleton,
   setLimit,
+  setPage,
   setResetForm,
   setValueSearch,
 } from "../../redux/films/filmsSlice";
@@ -22,11 +23,13 @@ const SearchMain = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      if (valueSearch.length > 0) {
+    let timerId: string | number | NodeJS.Timeout | undefined;
+    if (valueSearch) {
+      timerId = setTimeout(() => {
+        dispatch(setPage(1));
         dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
-      }
-    }, 1000);
+      }, 1000);
+    }
 
     return () => clearTimeout(timerId);
   }, [valueSearch]);
@@ -41,7 +44,8 @@ const SearchMain = () => {
 
   const submitForm = () => {
     dispatch(setValueSearch(""));
-    dispatch(setCardSkeleton())
+    dispatch(setCardSkeleton());
+    dispatch(setPage(1));
     dispatch(
       fetchFilmsFilter({
         page: 1,
