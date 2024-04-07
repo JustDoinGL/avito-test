@@ -4,9 +4,11 @@
   border-radius: 10px;
   max-width: 350px;
   margin: 20px;
+  text-align: center;
 
   &__image {
     width: 100%;
+    margin: 0 auto;
     object-fit: cover;
     border-radius: 5px;
   }
@@ -23,6 +25,9 @@
     margin-top: 10px;
     color: var(--secondary--text-color);
     font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   &__description {

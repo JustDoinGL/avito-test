@@ -1,6 +1,6 @@
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint, Status } from '../@types/enum';
 import { FilmID } from './../../@types/filmId';
 import { Doc } from '../../@types/films'
-import { Status } from '../@types/enum'
 
 type FilmsState = {
 	film: FilmID | null
@@ -11,6 +11,10 @@ type FilmsState = {
 	limit: number
 	favoriteFilms: number[]
 	valueSearch: string
+	ageLint: AgeLint
+	cityLint: CountryLint
+	ageFilmLint: FilmAgeLint
+	ratingLint: RatingLint
 }
 
 const favoriteFilmsFromStorage = localStorage.getItem('favoriteFilms');
@@ -24,6 +28,10 @@ export const initialState: FilmsState = {
 	page: 1,
 	favoriteFilms: defaultFavoriteFilms,
 	limit: 10,
-	valueSearch: ''
+	valueSearch: '',
+	ageLint: AgeLint.Start,
+	cityLint: CountryLint.Start,
+	ageFilmLint: FilmAgeLint.Start,
+	ratingLint: RatingLint.Start,
 }
 

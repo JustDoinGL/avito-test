@@ -1,22 +1,34 @@
-import { InputNumber } from "antd";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button, InputNumber } from "antd";
 import InputText from "../../ui/InputText/InputText";
 import styles from "./SearchFilms.module.scss";
-import { SearchFilmsProps } from "./SearchFilms.type";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setLimit, setValueSearch } from "../../redux/films/filmsSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchFilmsFilter } from "../../redux/films/getFilterFilms";
-const SearchMain = ({}: SearchFilmsProps) => {
+import DropdownMenu from "./SettingsSearch/SettingsSearch";
+import ModalUI from "../../ui/ModalUI/ModalUI";
+import { fetchSearchFilms } from "../../redux/films/getSearchFilms";
+
+const SearchMain = () => {
   const dispatch = useAppDispatch();
-  const { limit, valueSearch } = useAppSelector((state) => state.films);
+  const {
+    limit,
+    valueSearch,
+    ageLint,
+    cityLint,
+    ageFilmLint,
+    ratingLint,
+  } = useAppSelector((state) => state.films);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      dispatch(fetchFilmsFilter({ page: 1, limit, query: valueSearch }));
+      dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
     }, 1000);
 
     return () => clearTimeout(timerId);
-  }, [limit, valueSearch]);
+  }, [valueSearch]);
 
   const changeLimit = (value: number) => {
     dispatch(setLimit(value));
@@ -26,6 +38,20 @@ const SearchMain = ({}: SearchFilmsProps) => {
     dispatch(setValueSearch(value));
   };
 
+  const submitForm = () => {
+    dispatch(setValueSearch(""));
+    dispatch(
+      fetchFilmsFilter({
+        page: 1,
+        limit,
+        year: ageFilmLint,
+        ratingYear: ageLint,
+        city: cityLint,
+        rating: ratingLint,
+      })
+    );
+  };
+
   return (
     <div className={styles.container}>
       <InputText
@@ -33,20 +59,33 @@ const SearchMain = ({}: SearchFilmsProps) => {
         onChange={changeValueSearch}
         value={valueSearch}
       />
-      <div>
-        <label className={styles.label}>
-          Количество подгружаемых фильмов :
-        </label>
-        <InputNumber
-          className={styles.input__number}
-          min={1}
-          max={250}
-          value={limit}
-          onChange={(value) => {
-            value && changeLimit(value);
-          }}
-        />
-      </div>
+      <Button type="primary" onClick={() => setIsModalVisible(true)}>
+        Дополнительные настройки поиска
+      </Button>
+      <ModalUI
+        submitForm={submitForm}
+        open={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        title="Настройки поиска"
+      >
+        <>
+          <div>
+            <label className={styles.label}>
+              Количество подгружаемых фильмов :
+            </label>
+            <InputNumber
+              className={styles.input__number}
+              min={1}
+              max={250}
+              value={limit}
+              onChange={(value) => {
+                value && changeLimit(value);
+              }}
+            />
+          </div>
+          <DropdownMenu />
+        </>
+      </ModalUI>
     </div>
   );
 };

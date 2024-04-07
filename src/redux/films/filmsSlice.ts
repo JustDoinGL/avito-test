@@ -1,10 +1,10 @@
 import { initialState } from './films.type'
-import { Status } from '../@types/enum'
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint, Status } from '../@types/enum'
 import { fetchFilms } from './getFilms'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { Films } from '../../@types/films'
 import { fetchFilm } from './getFilm'
 import { fetchFilmsFilter } from './getFilterFilms'
+import { fetchSearchFilms } from './getSearchFilms'
 
 const filmsSlice = createSlice({
 	name: 'films',
@@ -15,7 +15,19 @@ const filmsSlice = createSlice({
 		},
 		setValueSearch: (state, action: PayloadAction<string>) => {
 			state.valueSearch = action.payload
-		}
+		},
+		setAgeLint: (state, action: PayloadAction<AgeLint>) => {
+			state.ageLint = action.payload
+		},
+		setCityLint: (state, action: PayloadAction<CountryLint>) => {
+			state.cityLint = action.payload
+		},
+		setAgeFilmLint: (state, action: PayloadAction<FilmAgeLint>) => {
+			state.ageFilmLint = action.payload
+		},
+		setRatingLint: (state, action: PayloadAction<RatingLint>) => {
+			state.ratingLint = action.payload
+		},
 		// setFavoritefilms: (state, action: PayloadAction<Films>) => {
 		// 	const user = action.payload;
 		// 	const index = state.favoritefilms.findIndex((userId) => userId === user.id);
@@ -50,7 +62,8 @@ const filmsSlice = createSlice({
 			.addCase(fetchFilms.rejected, state => {
 				state.status = Status.rejected
 			})
-			// film id
+
+			// filmid
 			.addCase(fetchFilm.pending, state => {
 				state.status = Status.pending
 			})
@@ -61,27 +74,39 @@ const filmsSlice = createSlice({
 			.addCase(fetchFilm.rejected, state => {
 				state.status = Status.rejected
 			})
+
 			// filterFilms
 			.addCase(fetchFilmsFilter.pending, state => {
 				state.status = Status.pending
 			})
 			.addCase(fetchFilmsFilter.fulfilled, (state, action) => {
+				state.isFull = false
+				state.page = 1
 				const filmsData = action.payload.docs;
 				state.isFull = filmsData.length === 0;
-				if (!state.isFull) {
-					state.films = filmsData
-					state.page++;
-				}
-				state.status = Status.fulfilled;
-				state.films = action.payload.docs;
-				if (!state.isFull) {
-
-					state.page++;
-				}
-				state.page = 2
+				state.films = filmsData
+				state.page++;
 				state.status = Status.fulfilled;
 			})
 			.addCase(fetchFilmsFilter.rejected, state => {
+				state.status = Status.rejected
+			})
+
+			// fetchSearchFilms
+			.addCase(fetchSearchFilms.pending, state => {
+				state.status = Status.pending
+			})
+			.addCase(fetchSearchFilms.fulfilled, (state, action) => {
+				state.isFull = false
+				state.page = 1
+				const filmsData = action.payload.docs;
+				state.isFull = filmsData.length === 0;
+				state.films = filmsData
+				state.page++;
+				state.status = Status.fulfilled
+
+			})
+			.addCase(fetchSearchFilms.rejected, state => {
 				state.status = Status.rejected
 			})
 	}
@@ -89,5 +114,5 @@ const filmsSlice = createSlice({
 
 export default filmsSlice.reducer
 
-export const { setLimit, setValueSearch } = filmsSlice.actions
+export const { setLimit, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
 

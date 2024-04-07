@@ -1,7 +1,7 @@
 import styles from "./LoaderError.module.scss";
 import { LoaderErrorProps } from "./LoaderError.type";
 
-const LoaderError = ({ status }: LoaderErrorProps) => {
+const LoaderError = ({ status, isFull }: LoaderErrorProps) => {
   return (
     <div>
       {status === "pending" && <div className={styles.loader__spinner}></div>}
@@ -10,6 +10,7 @@ const LoaderError = ({ status }: LoaderErrorProps) => {
           Произошла ошибка, пожалуйста, попробуйте еще раз.
         </div>
       )}
+      {isFull && <p className="text">Контнетн закончился</p>}
     </div>
   );
 };

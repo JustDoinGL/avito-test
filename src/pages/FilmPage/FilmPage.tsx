@@ -4,11 +4,12 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchFilm } from "../../redux/films/getFilm";
 import styles from "./FilmPage.module.scss";
 import FilmHeader from "../../components/FilmHeader/FilmHeader";
+import LoaderError from "../../ui/loaderError/LoaderError";
 
 const FilmPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { film, status } = useAppSelector((state) => state.films);
+  const { film, status, isFull } = useAppSelector((state) => state.films);
 
   useEffect(() => {
     if (id) {
@@ -42,6 +43,10 @@ const FilmPage = () => {
       </div>
     );
   }
-  return null;
+  return (
+    <div className="loader">
+       <LoaderError status={status} isFull={isFull} />
+    </div>
+  );
 };
 export default FilmPage;

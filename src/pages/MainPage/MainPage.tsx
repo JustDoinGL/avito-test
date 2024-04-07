@@ -6,19 +6,39 @@ import { useInView } from "react-intersection-observer";
 import LoaderError from "../../ui/loaderError/LoaderError";
 import CardFilmSkeleton from "../../components/CardFilm/CardFilmSkeleton";
 import SearchMain from "../../components/SearchFilms/SearchFilms";
+import ButtonTop from "../../ui/ButtonTop/ButtonTop";
 
 const MainPage = () => {
   const { ref, inView } = useInView();
   const dispatch = useAppDispatch();
-  const { films, status, page, limit, valueSearch } = useAppSelector(
-    (state) => state.films
-  );
+  const {
+    films,
+    status,
+    page,
+    limit,
+    valueSearch,
+    ageFilmLint,
+    ageLint,
+    cityLint,
+    ratingLint,
+    isFull,
+  } = useAppSelector((state) => state.films);
 
   useEffect(() => {
-    if (inView || page === 1) {
-      dispatch(fetchFilms({ page: page, limit: limit, query: valueSearch }));
+    if (inView && !isFull) {
+      dispatch(
+        fetchFilms({
+          page: page,
+          limit: limit,
+          query: valueSearch,
+          city: cityLint,
+          year: ageFilmLint,
+          ratingYear: ageLint,
+          rating: ratingLint,
+        })
+      );
     }
-  }, [dispatch, inView, page]);
+  }, [inView]);
 
   return (
     <div className="container">
@@ -32,8 +52,9 @@ const MainPage = () => {
         <CardFilm film={film} key={film.id} />
       ))}
       <div ref={ref} className="loader">
-        <LoaderError status={status} />
+        <LoaderError status={status} isFull={isFull} />
       </div>
+      <ButtonTop />
     </div>
   );
 };
