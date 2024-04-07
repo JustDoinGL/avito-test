@@ -15,13 +15,14 @@ const FilmPage = () => {
     if (id) {
       dispatch(fetchFilm({ id }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (film) {
     return (
       <div className={`container ${styles.film}`}>
         <FilmHeader
-          name={film.name}
+          name={film?.name}
           slogan={film.slogan}
           poster={film.poster.url}
           description={film.description}

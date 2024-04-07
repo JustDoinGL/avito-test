@@ -3,7 +3,12 @@ import { Button, InputNumber } from "antd";
 import InputText from "../../ui/InputText/InputText";
 import styles from "./SearchFilms.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setLimit, setValueSearch } from "../../redux/films/filmsSlice";
+import {
+  setCardSkeleton,
+  setLimit,
+  setResetForm,
+  setValueSearch,
+} from "../../redux/films/filmsSlice";
 import { useEffect, useState } from "react";
 import { fetchFilmsFilter } from "../../redux/films/getFilterFilms";
 import DropdownMenu from "./SettingsSearch/SettingsSearch";
@@ -12,19 +17,15 @@ import { fetchSearchFilms } from "../../redux/films/getSearchFilms";
 
 const SearchMain = () => {
   const dispatch = useAppDispatch();
-  const {
-    limit,
-    valueSearch,
-    ageLint,
-    cityLint,
-    ageFilmLint,
-    ratingLint,
-  } = useAppSelector((state) => state.films);
+  const { limit, valueSearch, ageLint, cityLint, ageFilmLint, ratingLint } =
+    useAppSelector((state) => state.films);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
+      if (valueSearch.length > 0) {
+        dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
+      }
     }, 1000);
 
     return () => clearTimeout(timerId);
@@ -40,6 +41,7 @@ const SearchMain = () => {
 
   const submitForm = () => {
     dispatch(setValueSearch(""));
+    dispatch(setCardSkeleton())
     dispatch(
       fetchFilmsFilter({
         page: 1,
@@ -50,6 +52,10 @@ const SearchMain = () => {
         rating: ratingLint,
       })
     );
+  };
+
+  const resetForm = () => {
+    dispatch(setResetForm());
   };
 
   return (
@@ -64,6 +70,7 @@ const SearchMain = () => {
       </Button>
       <ModalUI
         submitForm={submitForm}
+        resetFrom={resetForm}
         open={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         title="Настройки поиска"

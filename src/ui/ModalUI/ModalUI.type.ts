@@ -6,4 +6,5 @@ export type ModalUIProps = {
   setIsModalVisible: (isModalVisible: boolean) => void
   title: string
   submitForm: () => void
+  resetFrom: () => void
 }

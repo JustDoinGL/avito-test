@@ -11,12 +11,12 @@ type fetchFilmsArguments = {
     ratingYear?: AgeLint;
     city?: CountryLint;
     rating?: RatingLint;
-    query: string;
+    query?: string;
 };
 
 export const fetchFilms = createAsyncThunk<Films, fetchFilmsArguments>(
     'films/fetchFilms',
-    async ({ page = 1, limit = 10, year, ratingYear, city, rating, query }, { rejectWithValue }) => {
+    async ({ page = 1, limit = 10, year, ratingYear, city, rating, query='' }, { rejectWithValue }) => {
         const endpoint = query?.length > 0 ? '/search' : '';
         const baseURL = `https://api.kinopoisk.dev/v1.4/movie${endpoint}`;
 

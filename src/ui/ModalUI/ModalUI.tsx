@@ -6,6 +6,7 @@ const ModalUI = ({
   open,
   setIsModalVisible,
   submitForm,
+  resetFrom,
   title,
 }: ModalUIProps) => {
   const handleOk = () => {
@@ -15,6 +16,7 @@ const ModalUI = ({
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    resetFrom();
   };
 
   return (

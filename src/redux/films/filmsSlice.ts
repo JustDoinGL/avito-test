@@ -10,6 +10,9 @@ const filmsSlice = createSlice({
 	name: 'films',
 	initialState,
 	reducers: {
+		setPage: (state, action: PayloadAction<number>) => {
+			state.page = action.payload
+		},
 		setLimit: (state, action: PayloadAction<number>) => {
 			state.limit = action.payload
 		},
@@ -28,6 +31,24 @@ const filmsSlice = createSlice({
 		setRatingLint: (state, action: PayloadAction<RatingLint>) => {
 			state.ratingLint = action.payload
 		},
+		setResetForm: (state) => {
+			state.ageFilmLint = FilmAgeLint.Start
+			state.ageLint = AgeLint.Start
+			state.cityLint = CountryLint.Start
+			state.ratingLint = RatingLint.Start
+		},
+		setParams: (state, action: PayloadAction<any>) => {
+			state.page = Number(action.payload.page) ?? state.page;
+			state.limit = Number(action.payload.limit) ?? state.limit;
+			state.valueSearch = action.payload.valueSearch.length === 0 ? '' : action.payload.valueSearch
+			state.ratingLint = action.payload.ratingLint.length === 0 ? RatingLint.Start : action.payload.ratingLint
+			state.ageLint = action.payload.ageLint.length === 0 ? AgeLint.Start : action.payload.ageLint
+			state.ageFilmLint = action.payload.ageFilmLint.length === 0 ? FilmAgeLint.Start : action.payload.ageFilmLint
+			state.cityLint = action.payload.cityLint.length === 0 ? CountryLint.Start : action.payload.cityLint
+		},
+		setCardSkeleton: (state) => {
+			state.isCardSkeleton = !state.isCardSkeleton
+		}
 		// setFavoritefilms: (state, action: PayloadAction<Films>) => {
 		// 	const user = action.payload;
 		// 	const index = state.favoritefilms.findIndex((userId) => userId === user.id);
@@ -87,6 +108,7 @@ const filmsSlice = createSlice({
 				state.films = filmsData
 				state.page++;
 				state.status = Status.fulfilled;
+				state.isCardSkeleton = false
 			})
 			.addCase(fetchFilmsFilter.rejected, state => {
 				state.status = Status.rejected
@@ -114,5 +136,5 @@ const filmsSlice = createSlice({
 
 export default filmsSlice.reducer
 
-export const { setLimit, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
+export const { setLimit, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
 
