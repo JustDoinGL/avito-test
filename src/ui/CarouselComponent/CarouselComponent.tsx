@@ -1,45 +1,18 @@
 import { Carousel } from "antd";
 import styles from "./CarouselComponent.module.scss";
 import { CarouselComponentProps } from "./CarouselComponent.type";
+import React from "react";
 import Img from "../Img/Img";
-import { useWindowWidth } from "../../hooks/useResize";
-const CarouselComponent = ({ content }: CarouselComponentProps) => {
-  const windowWidth = useWindowWidth();
+
+const CarouselComponent: React.FC<CarouselComponentProps> = ({ content, beforeChange }) => {
   return (
-    <Carousel
-      autoplay
-      className={styles.carousel}
-      style={{
-        width:
-          windowWidth > 768
-            ? `${windowWidth - 300 > 700 ? 700 : windowWidth - 300}px`
-            : `${windowWidth - 50}px`,
-        height:
-          windowWidth > 768
-            ? `${windowWidth - 300 > 700 ? 700 : windowWidth - 300}px`
-            : `${windowWidth - 50}px`,
-      }}
-    >
-      {Object.entries(content).map(([key, value], index) => (
-        <div key={index} className={styles.imageContainer}>
+    <Carousel dots={false} effect="fade" autoplay className={styles.carousel} afterChange={beforeChange} waitForAnimate={true}>
+      {content.map((item) => (
+        <div key={item.id} className={styles.imageContainer}>
           <Img
             className={`${styles.imageContainer} ${styles.image}`}
-            width={
-              windowWidth > 768
-                ? windowWidth - 300 > 700
-                  ? 700
-                  : windowWidth - 300
-                : windowWidth - 50
-            }
-            height={
-              windowWidth > 768
-                ? windowWidth - 300 > 700
-                  ? 700
-                  : windowWidth - 300
-                : windowWidth - 50
-            }
-            src={value as string}
-            alt={`carousel ${key}`}
+            src={item.url}
+            alt={`carousel ${item.type}`}
           />
         </div>
       ))}
@@ -47,4 +20,11 @@ const CarouselComponent = ({ content }: CarouselComponentProps) => {
   );
 };
 
-export default CarouselComponent;
+function areEqual(
+  prevProps: CarouselComponentProps,
+  nextProps: CarouselComponentProps
+) {
+  return prevProps.content.length === nextProps.content.length;
+}
+
+export default React.memo(CarouselComponent, areEqual);

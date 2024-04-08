@@ -1,5 +1,6 @@
-import { Poster } from "../../@types/filmId"
+import { Photo } from "../../@types/photoFilms"
 
 export type CarouselComponentProps = {
-  content: Poster
+  content: Photo[]
+  beforeChange: () => void
 }

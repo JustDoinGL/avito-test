@@ -19,6 +19,7 @@ const FilmPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   if (film && status === "fulfilled") {
     return (
       <div className={`container ${styles.film}`}>
@@ -31,28 +32,16 @@ const FilmPage = () => {
           length={film.movieLength}
           year={film.year}
         />
-        <FilmMain film={film} />
-
-        {/* <div className={styles.moviePage__actors}>
-          Список актеров
-          {film.persons?.map((el) => (
-            <>{el.name}</>
-          ))}
-        </div>
-        <div className={styles.moviePage__seasons}>
-          Список сезонов и серий...
-        </div>
-        <div className={styles.moviePage__reviews}>Отзывы пользователей...</div>
-        <div className={styles.moviePage__posters}>Карусель постеров...</div> */}
+        <FilmMain film={film} id={id} />
       </div>
     );
   }
   return (
     <div className={`container ${styles.film}`}>
       <FilmHeaderSkeleton />
-      <div className="loader">
+      {status === "rejected" && <div className="loader">
         <LoaderError status={status} />
-      </div>
+      </div>}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import styles from "./SearchFilms.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   setCardSkeleton,
+  setIsValueSearchChange,
   setLimit,
   setPage,
   setResetForm,
@@ -18,21 +19,29 @@ import { fetchSearchFilms } from "../../redux/films/getSearchFilms";
 
 const SearchMain = () => {
   const dispatch = useAppDispatch();
-  const { limit, valueSearch, isValueSearchChange, ageLint, cityLint, ageFilmLint, ratingLint } =
-    useAppSelector((state) => state.films);
+  const {
+    limit,
+    valueSearch,
+    isValueSearchChange,
+    ageLint,
+    cityLint,
+    ageFilmLint,
+    ratingLint,
+  } = useAppSelector((state) => state.films);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
+    dispatch(setCardSkeleton());
     let timerId: string | number | NodeJS.Timeout | undefined;
-    if (isValueSearchChange) {
-    timerId = setTimeout(() => {
-      dispatch(setPage(1));
-      dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
-    }, 1000);
+    if (isValueSearchChange || valueSearch) {
+      timerId = setTimeout(() => {
+        dispatch(setPage(1));
+        dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
+      }, 1000);
     }
 
     return () => clearTimeout(timerId);
-  }, [valueSearch, setValueSearch]);
+  }, [valueSearch]);
 
   const changeLimit = (value: number) => {
     dispatch(setLimit(value));
@@ -44,6 +53,7 @@ const SearchMain = () => {
 
   const submitForm = () => {
     dispatch(setValueSearch(""));
+    dispatch(setIsValueSearchChange(false));
     dispatch(setCardSkeleton());
     dispatch(setPage(1));
     dispatch(

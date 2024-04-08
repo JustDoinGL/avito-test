@@ -1,10 +1,11 @@
 .carousel {
-  margin-top: 50px;
-  max-width: calc(100vw - 10px);
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: calc(100vw - 30px); 
+  max-height: calc(100vw - 30px); 
 }
 
 .imageContainer {
@@ -13,8 +14,11 @@
   justify-content: center;
   align-items: center;
   object-fit: cover;
+  max-width: calc(100vw - 30px); 
+  max-height: calc(100vw - 30px); 
 
   .image {
     object-fit: contain;
+    width: 100%; 
   }
 }

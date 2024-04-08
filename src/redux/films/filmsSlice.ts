@@ -16,6 +16,9 @@ const filmsSlice = createSlice({
 		setLimit: (state, action: PayloadAction<number>) => {
 			state.limit = action.payload
 		},
+		setIsValueSearchChange: (state, action: PayloadAction<boolean>) => {
+			state.isValueSearchChange = action.payload
+		},
 		setValueSearch: (state, action: PayloadAction<string>) => {
 			state.valueSearch = action.payload
 			state.isValueSearchChange = true
@@ -127,7 +130,7 @@ const filmsSlice = createSlice({
 				state.films = filmsData
 				state.page++;
 				state.status = Status.fulfilled
-
+				state.isCardSkeleton = false
 			})
 			.addCase(fetchSearchFilms.rejected, state => {
 				state.status = Status.rejected
@@ -137,5 +140,5 @@ const filmsSlice = createSlice({
 
 export default filmsSlice.reducer
 
-export const { setLimit, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
+export const { setLimit, setIsValueSearchChange, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
 

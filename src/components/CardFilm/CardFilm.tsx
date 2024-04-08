@@ -8,7 +8,7 @@ import { useWindowWidth } from "../../hooks/useResize";
 export const CardFilm = ({ film }: CardFilmProps) => {
   const width = useWindowWidth();
   return (
-    <Link to={`/${film.id}`} className={styles.filmCard}>
+    <Link to={`/film/${film.id}`} className={styles.filmCard}>
       <Img
         src={film.poster.url}
         alt={film?.name || ""}

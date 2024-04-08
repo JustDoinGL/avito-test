@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path={`/`} element={<DefaultLayout />}>
           <Route index element={<MainPage />} />
-          <Route path={`/:id`} element={<FilmPage />} />
+          <Route path={`/film/:id`} element={<FilmPage />} />
         </Route>
         {/* <Route
           path="/"

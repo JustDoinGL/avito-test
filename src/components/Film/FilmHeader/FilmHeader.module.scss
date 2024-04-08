@@ -23,6 +23,7 @@
 }
 
 .description {
+  max-width: calc(100wm - 40px);
   margin-top: 10px;
   word-break: break-word;
   text-indent: 10px;
