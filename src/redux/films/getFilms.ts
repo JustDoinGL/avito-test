@@ -27,13 +27,13 @@ export const fetchFilms = createAsyncThunk<Films, fetchFilmsArguments>(
         const endpoint = query?.length > 0 ? '/search' : '';
         const baseURL = `https://api.kinopoisk.dev/v1.4/movie${endpoint}`;
 
-        if(cancelToken) cancelToken.cancel();
+        // if(cancelToken) cancelToken.cancel();
 
-        cancelToken = axios.CancelToken.source();
+        // cancelToken = axios.CancelToken.source();
 
-        signal.onabort = () => {
-            if(cancelToken) cancelToken.cancel();
-        };
+        // signal.onabort = () => {
+        //     if(cancelToken) cancelToken.cancel();
+        // };
 
         let retries = RETRIES;
         while (retries) {
@@ -52,7 +52,7 @@ export const fetchFilms = createAsyncThunk<Films, fetchFilmsArguments>(
                         'X-API-KEY': process.env.REACT_APP_TOKEN,
                         'Accept': 'application/json',
                     },
-                    cancelToken: cancelToken.token
+                    // cancelToken: cancelToken.token
                 });
 
                 return response.data;

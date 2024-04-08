@@ -18,6 +18,7 @@ const filmsSlice = createSlice({
 		},
 		setValueSearch: (state, action: PayloadAction<string>) => {
 			state.valueSearch = action.payload
+			state.isValueSearchChange = true
 		},
 		setAgeLint: (state, action: PayloadAction<AgeLint>) => {
 			state.ageLint = action.payload

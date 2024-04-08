@@ -16,6 +16,7 @@ type FilmsState = {
 	ageFilmLint: FilmAgeLint
 	ratingLint: RatingLint
 	isCardSkeleton: boolean
+	isValueSearchChange: boolean
 }
 
 const favoriteFilmsFromStorage = localStorage.getItem('favoriteFilms');
@@ -34,6 +35,7 @@ export const initialState: FilmsState = {
 	cityLint: CountryLint.Start,
 	ageFilmLint: FilmAgeLint.Start,
 	ratingLint: RatingLint.Start,
-	isCardSkeleton: false
+	isCardSkeleton: false,
+	isValueSearchChange: false,
 }
 

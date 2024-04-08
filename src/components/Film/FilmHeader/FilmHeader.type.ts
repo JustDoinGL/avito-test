@@ -1,4 +1,4 @@
-import { Rating } from "../../@types/filmId"
+import { Rating } from "../../../@types/filmId"
 
 export type FilmHeaderProps = {
   slogan: string

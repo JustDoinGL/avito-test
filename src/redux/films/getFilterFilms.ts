@@ -5,7 +5,7 @@ import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../@types/enum';
 import { getRatingKey, isStart } from '../../helpers/getKey';
 import { RETRIES } from '../../helpers/const';
 
-let cancelToken: CancelTokenSource;
+// let cancelToken: CancelTokenSource;
 
 export const cancelFetchFilmsFilter = createAction('films/cancelFetchFilmsFilter');
 
@@ -23,13 +23,13 @@ export const fetchFilmsFilter = createAsyncThunk<Films, fetchFilmsArguments>(
   async ({ page = 1, limit = 10, year, ratingYear, city, rating }, { rejectWithValue, dispatch, signal }) => {
     const baseURL = `https://api.kinopoisk.dev/v1.4/movie`;
 
-    if(cancelToken) cancelToken.cancel();
+    // if(cancelToken) cancelToken.cancel();
 
-    cancelToken = axios.CancelToken.source();
+    // cancelToken = axios.CancelToken.source();
 
-    signal.onabort = () => {
-      if(cancelToken) cancelToken.cancel();
-    };
+    // signal.onabort = () => {
+    //   if(cancelToken) cancelToken.cancel();
+    // };
     
     let retries = RETRIES;
     while (retries) {
@@ -47,7 +47,7 @@ export const fetchFilmsFilter = createAsyncThunk<Films, fetchFilmsArguments>(
             'X-API-KEY': process.env.REACT_APP_TOKEN,
             'Accept': 'application/json',
           },
-          cancelToken: cancelToken.token
+          // cancelToken: cancelToken.token
         });
         return response.data;
       } catch (error) {

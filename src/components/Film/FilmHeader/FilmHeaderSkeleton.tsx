@@ -1,5 +1,5 @@
-import { useWindowWidth } from "../../hooks/useResize";
-import { Skeleton } from "../../ui/skeleton/Skeleton";
+import { useWindowWidth } from "../../../hooks/useResize";
+import { Skeleton } from "../../../ui/skeleton/Skeleton";
 import styles from "./FilmHeader.module.scss";
 const FilmHeaderSkeleton = () => {
   const windowWidth = useWindowWidth();

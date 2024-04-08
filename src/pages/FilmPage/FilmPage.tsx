@@ -3,19 +3,18 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchFilm } from "../../redux/films/getFilm";
 import styles from "./FilmPage.module.scss";
-import FilmHeader from "../../components/FilmHeader/FilmHeader";
 import LoaderError from "../../ui/loaderError/LoaderError";
-import FilmHeaderSkeleton from "../../components/FilmHeader/FilmHeaderSkeleton";
+import { FilmHeader, FilmHeaderSkeleton, FilmMain } from "../../components/Film";
 
 const FilmPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { film, status, isFull } = useAppSelector((state) => state.films);
+  const { film, status } = useAppSelector((state) => state.films);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchFilm({ id }));
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -32,6 +31,7 @@ const FilmPage = () => {
           length={film.movieLength}
           year={film.year}
         />
+        <FilmMain film={film} />
 
         {/* <div className={styles.moviePage__actors}>
           Список актеров
@@ -51,7 +51,7 @@ const FilmPage = () => {
     <div className={`container ${styles.film}`}>
       <FilmHeaderSkeleton />
       <div className="loader">
-        <LoaderError status={status} isFull={isFull} />
+        <LoaderError status={status} />
       </div>
     </div>
   );
