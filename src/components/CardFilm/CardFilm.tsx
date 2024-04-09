@@ -2,7 +2,7 @@ import styles from "./CardFilm.module.scss";
 import { CardFilmProps } from "./CardFilm.type";
 import RateStar from "../../ui/rateStar/RateStar";
 import { Link } from "react-router-dom";
-import Img from "../../ui/Img/Img";
+import Img from "../../ui/img/Img";
 import { useWindowWidth } from "../../hooks/useResize";
 
 export const CardFilm = ({ film }: CardFilmProps) => {

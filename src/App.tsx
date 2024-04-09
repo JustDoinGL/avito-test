@@ -3,6 +3,9 @@ import { useAppSelector } from "./hooks/redux";
 import DefaultLayout from "./layouts/DefaultLayout";
 import MainPage from "./pages/MainPage/MainPage";
 import FilmPage from "./pages/FilmPage/FilmPage";
+import { NeedAuth } from "./hoc/NeedAuth";
+import { RequireAuth } from "./hoc/RequireAuth";
+import { AuthPage } from "./pages/AuthPage/AuthPage";
 
 function App() {
   const { value: theme } = useAppSelector((state) => state.theme);
@@ -14,11 +17,11 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path={`/film/:id`} element={<FilmPage />} />
         </Route>
-        {/* <Route
-          path="/"
+        <Route
+          path="/auth"
           element={
             <NeedAuth>
-              <SignUpPage />
+              <AuthPage />
             </NeedAuth>
           }
         />
@@ -27,13 +30,13 @@ function App() {
           path="/catalog"
           element={
             <RequireAuth>
-              <CatalogLayout />
+              <DefaultLayout />
             </RequireAuth>
           }
         >
-          <Route index element={<CatalogPage />} />
-          <Route path="/catalog/:id" element={<UserPage />} />
-        </Route> */}
+          {/* <Route index element={<CatalogPage />} />
+          <Route path="/catalog/:id" element={<UserPage />} /> */}
+        </Route>
       </Routes>
     </div>
   );

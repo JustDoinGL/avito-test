@@ -9,8 +9,11 @@ import { resetReviewsContent } from "../../../redux/reviews/reviewsSlice";
 import PosterCard from "./PosterCard/PosterCard";
 import ActorsCard from "./ActorsCard/ActorsCard";
 import LoaderError from "../../../ui/loaderError/LoaderError";
-import ButtonTop from "../../../ui/ButtonTop/ButtonTop";
+import ButtonTop from "../../../ui/buttonTop/ButtonTop";
 import { useInView } from "react-intersection-observer";
+import { resetSeriesContent } from "../../../redux/series/seriesSlice";
+import { fetchSeries } from "../../../redux/series/getSeries";
+import SeriesCard from "./SeriesCard/SeriesCard";
 
 const FilmMain = ({ film, id }: FilmMainProps) => {
   const dispatch = useAppDispatch();
@@ -24,12 +27,15 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
     status,
     isEnd,
   } = useAppSelector((state) => state.reviews);
+  const { page: pageSeries, series } = useAppSelector((state) => state.series);
 
   useEffect(() => {
     if (id) {
       dispatch(resetPhotoContent(id));
+      dispatch(resetSeriesContent(id));
       dispatch(resetReviewsContent(id));
       dispatch(fetchPhotoFilms({ id: id, page: pagePhoto }));
+      dispatch(fetchSeries({ id: id, page: pageSeries }));
       dispatch(fetchReviews({ id: id, page: pageReviews }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,6 +55,7 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
       {comments?.map((comment) => (
         <ReviewCard comment={comment} key={comment.id} />
       ))}
+      {/* {series && <SeriesCard film={series} />} */}
       <div ref={ref} className="loader">
         <LoaderError status={status} isFull={isEnd} />
       </div>

@@ -12,7 +12,7 @@ import {
   setRatingLint,
 } from "../../../redux/films/filmsSlice";
 import styles from "./SettingsSearch.module.scss";
-import DropDownMenu from "../../../ui/DropDown/DropDownMenu";
+import DropDownMenu from "../../../ui/dropDown/DropDownMenu";
 
 const SettingsSearch = () => {
   const dispatch = useAppDispatch();

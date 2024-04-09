@@ -1,6 +1,6 @@
 import styles from "./PosterCard.module.scss";
 import { useAppSelector } from "../../../../hooks/redux";
-import CarouselComponent from "../../../../ui/CarouselComponent/CarouselComponent";
+import CarouselComponent from "../../../../ui/carouselComponent/CarouselComponent";
 
 const PosterCard = () => {
   const { photo, status } = useAppSelector((state) => state.photoFilms);

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   padding: 20px;
   background-color: var(--secondary-bg-color);
   border-bottom: 1px solid var(--gray-color);
@@ -17,17 +18,23 @@
   align-items: center;
 }
 
-.hamburger {
-  display: none;
+.header__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-@media only screen and (max-width: 768px) {
-  .header {
-    flex-direction: column;
-  }
-
-  .nav {
-    flex-direction: column;
-    align-items: start;
+.dark {
+  :global {
+    .ant-drawer-header {
+      background: var(--gray-color);
+    }
+    .ant-drawer-body {
+      background: var(--gray-color);
+    }
+    .ant-drawer-body .Header_header__right__mjU6D span svg {
+      fill: white;
+    }
   }
 }

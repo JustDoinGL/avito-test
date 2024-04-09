@@ -3,6 +3,8 @@ import themeReducer from './theme/themeSlice'
 import filmsReducer from './films/filmsSlice'
 import photoFilmsSlice from './photoFilms/photoFilmsSlice'
 import reviewsSlice from './reviews/reviewsSlice'
+import seriesSlice from './series/seriesSlice'
+import registrationSlice from './registration/registrationSlice'
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
 		films: filmsReducer,
 		photoFilms: photoFilmsSlice,
 		reviews: reviewsSlice,
+		series: seriesSlice,
+		registration: registrationSlice,
 	}
 })
 

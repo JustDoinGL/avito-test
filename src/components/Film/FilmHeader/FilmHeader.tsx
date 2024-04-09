@@ -1,7 +1,7 @@
 import { formatLength } from "../../../helpers/formatLengthMovie";
 import { useWindowWidth } from "../../../hooks/useResize";
-import BackLink from "../../../ui/BackLink/BackLink";
-import Img from "../../../ui/Img/Img";
+import BackLink from "../../../ui/backLink/BackLink";
+import Img from "../../../ui/img/Img";
 import RateStar from "../../../ui/rateStar/RateStar";
 import styles from "./FilmHeader.module.scss";
 import { FilmHeaderProps } from "./FilmHeader.type";

@@ -1,6 +1,9 @@
 export type InputTextProps = {
+  type: string,
   className?: string
-  placeholder?: string
+  value: string,
   onChange: (value: string) => void
-  value: string
+  helper?: string
+  placeholder: string
+  isRight?: boolean
 }

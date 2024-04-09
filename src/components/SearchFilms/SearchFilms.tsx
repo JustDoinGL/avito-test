@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button, InputNumber } from "antd";
-import InputText from "../../ui/InputText/InputText";
+import InputText from "../../ui/inputText/InputText";
 import styles from "./SearchFilms.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { fetchFilmsFilter } from "../../redux/films/getFilterFilms";
 import DropdownMenu from "./SettingsSearch/SettingsSearch";
-import ModalUI from "../../ui/ModalUI/ModalUI";
+import ModalUI from "../../ui/modalUI/ModalUI";
 import { fetchSearchFilms } from "../../redux/films/getSearchFilms";
 
 const SearchMain = () => {
@@ -75,11 +75,13 @@ const SearchMain = () => {
   return (
     <div className={styles.container}>
       <InputText
+        placeholder="Поиск по названию"
+        type="text"
         className={styles.input}
         onChange={changeValueSearch}
         value={valueSearch}
       />
-      <Button type="primary" onClick={() => setIsModalVisible(true)}>
+      <Button className={styles.button} type="primary" onClick={() => setIsModalVisible(true)}>
         Дополнительные настройки поиска
       </Button>
       <ModalUI

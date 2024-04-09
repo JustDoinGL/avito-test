@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 20px;
+  line-height: 23px;
+}
+
+
+.button {
+  width: 100%;
+  background: var(--black-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+
+  text-align: center;
+  color: var(--white-color);
+  font-size: 16px;
+  line-height: 136.19%;
+
+  &:hover {
+    color: gold;
+  }
+
+  &:disabled {
+    background: var(--gray-color);
+    cursor: not-allowed;
+    &:hover {
+      color: var(--white-color);
+    }
+  }
+}

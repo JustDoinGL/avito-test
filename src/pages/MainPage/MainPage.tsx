@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import LoaderError from "../../ui/loaderError/LoaderError";
 import CardFilmSkeleton from "../../components/CardFilm/CardFilmSkeleton";
 import SearchMain from "../../components/SearchFilms/SearchFilms";
-import ButtonTop from "../../ui/ButtonTop/ButtonTop";
+import ButtonTop from "../../ui/buttonTop/ButtonTop";
 import { useNavigate } from "react-router-dom";
 import { getRatingKey, isStart } from "../../helpers/getKey";
 import {
