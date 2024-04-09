@@ -7,6 +7,7 @@ type RegistrationState = {
   pages: number
   isEnd: boolean
   comments: Review[]
+  id: string
 };
 
 export const initialState: RegistrationState = {
@@ -14,5 +15,6 @@ export const initialState: RegistrationState = {
   page: 1,
   pages: 0,
   isEnd: false,
-  comments: []
+  comments: [],
+  id: '',
 };

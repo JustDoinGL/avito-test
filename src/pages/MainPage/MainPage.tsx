@@ -74,7 +74,7 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    if (inView && !isFull && !isCardSkeleton) {
+    if (isCardSkeleton && inView && !isFull) {
       dispatch(
         fetchFilms({
           page: page,
@@ -111,7 +111,8 @@ const MainPage = () => {
     <div className="container">
       <SearchMain />
       {status === "pending" &&
-        (films.length === 0 || isCardSkeleton) &&
+        films.length === 0 &&
+        isCardSkeleton &&
         Array.from({ length: 10 }).map((_, index) => (
           <CardFilmSkeleton key={index} />
         ))}

@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchFilm } from "../../redux/films/getFilm";
 import styles from "./FilmPage.module.scss";
-import LoaderError from "../../ui/loaderError/LoaderError";
-import { FilmHeader, FilmHeaderSkeleton, FilmMain } from "../../components/Film";
+import {
+  FilmHeader,
+  FilmHeaderSkeleton,
+  FilmMain,
+} from "../../components/Film";
+import NotFound from "../404/NotFound";
 
 const FilmPage = () => {
   const { id } = useParams();
@@ -18,7 +22,6 @@ const FilmPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   if (film && status === "fulfilled") {
     return (
@@ -37,12 +40,12 @@ const FilmPage = () => {
     );
   }
   return (
-    <div className={`container ${styles.film}`}>
-      <FilmHeaderSkeleton />
-      {status === "rejected" && <div className="loader">
-        <LoaderError status={status} />
-      </div>}
-    </div>
+    <>
+      {status === "rejected" && <NotFound />}
+      <div className={`container ${styles.film}`}>
+        {status === "pending" && <FilmHeaderSkeleton />}
+      </div>
+    </>
   );
 };
 export default FilmPage;

@@ -1,5 +1,5 @@
 import { initialState } from './photoFilms.type'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchPhotoFilms } from './getPhotoFilms'
 import { Status } from '../@types/enum'
 
@@ -12,6 +12,13 @@ const photoFilmsSlice = createSlice({
 		},
 		setPhoto: (state) => {
 			state.photo = []
+		},
+		resetPhotoContent: (state, action: PayloadAction<string>) => {
+			if (state.id === action.payload) {
+				state.photo = []
+			} else {
+				state.id = action.payload
+			}
 		}
 	},
 	extraReducers: builder => {
@@ -38,4 +45,4 @@ const photoFilmsSlice = createSlice({
 
 export default photoFilmsSlice.reducer
 
-export const { setIsEnd, setPhoto} = photoFilmsSlice.actions
+export const { setIsEnd, setPhoto, resetPhotoContent } = photoFilmsSlice.actions

@@ -7,7 +7,13 @@ const reviewsSlice = createSlice({
 	name: 'reviews',
 	initialState,
 	reducers: {
-
+		resetReviewsContent: (state, action: PayloadAction<string>) => {
+			if (state.id === action.payload) {
+				state.comments = []
+			} else {
+				state.id = action.payload
+			}
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -28,6 +34,6 @@ const reviewsSlice = createSlice({
 
 export default reviewsSlice.reducer;
 
-export const { } = reviewsSlice.actions;
+export const { resetReviewsContent } = reviewsSlice.actions;
 
 

@@ -15,7 +15,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({  content }) => {
     >
       {content.map((item) => (
                 <div key={item.movieId} className={styles.imageContainer}>
-                  <p style={{ zIndex: -10 }}>{item.createdAt}</p>
+                  <p className={styles.text}>{item.createdAt}</p>
                   <Img
                     className={`${styles.imageContainer} ${styles.image}`}
                     src={item.url}

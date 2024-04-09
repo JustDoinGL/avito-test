@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.errorCode {
+  font-size: 6em;
+  color: #c00;
+}
+
+.errorMessage {
+  font-size: 1.5em;
+}
+
+.homeLink {
+  font-size: 2.5em;
+  color: blue;
+  transition: all 0.3s ease;
+}
+
+.homeLink:hover {
+  text-decoration: none;
+  color: red;
+  text-shadow: 0 0 3px blue;
+}

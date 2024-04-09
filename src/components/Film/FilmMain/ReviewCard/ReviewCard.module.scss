@@ -1,0 +1,53 @@
+.card {
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag {
+  background-color: gray;
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+
+.title {
+  margin: 1rem 0;
+}
+
+.text {
+  margin-bottom: 1rem;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.like {
+  color: green;
+}
+
+.dislike {
+  color: red;
+}
+
+.dark {
+  :global {
+    .ant-collapse-expand-icon {
+      color: var(--white-color);
+    }
+    .ant-collapse-header-text {
+      color: var(--white-color);
+    }
+  }
+}

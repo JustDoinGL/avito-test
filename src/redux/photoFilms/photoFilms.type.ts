@@ -7,6 +7,7 @@ type FilmsState = {
 	total: number
 	isEnd: boolean
 	page: number
+	id: string
 }
 
 
@@ -16,5 +17,6 @@ export const initialState: FilmsState = {
 	total: 0,
 	isEnd: false,
 	page: 1,
+	id: ''
 }
 

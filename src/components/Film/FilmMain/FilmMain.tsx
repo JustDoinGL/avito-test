@@ -1,110 +1,58 @@
 import { useEffect } from "react";
-import CarouselComponent from "../../../ui/CarouselComponent/CarouselComponent";
-import styles from "./FilmMain.module.scss";
 import { FilmMainProps } from "./FilmMain.type";
-import { Image, Table } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { fetchPhotoFilms } from "../../../redux/photoFilms/getPhotoFilms";
-import { useWindowWidth } from "../../../hooks/useResize";
-import Img from "../../../ui/Img/Img";
-import { useInView } from "react-intersection-observer";
 import { fetchReviews } from "../../../redux/reviews/getReviews";
+import ReviewCard from "./ReviewCard/ReviewCard";
+import { resetPhotoContent } from "../../../redux/photoFilms/photoFilmsSlice";
+import { resetReviewsContent } from "../../../redux/reviews/reviewsSlice";
+import PosterCard from "./PosterCard/PosterCard";
+import ActorsCard from "./ActorsCard/ActorsCard";
+import LoaderError from "../../../ui/loaderError/LoaderError";
+import ButtonTop from "../../../ui/ButtonTop/ButtonTop";
+import { useInView } from "react-intersection-observer";
 
 const FilmMain = ({ film, id }: FilmMainProps) => {
   const dispatch = useAppDispatch();
-  const { page, photo, isEnd, status } = useAppSelector(
-    (state) => state.photoFilms
-  );
-  const {
-    page: pageR,
-    pages,
-    comments,
-  } = useAppSelector((state) => state.reviews);
-  const windowWidth = useWindowWidth();
-
   const { ref, inView } = useInView();
 
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchPhotoFilms({ id: id, page: page }));
-    }
-  }, []);
+  const { page: pagePhoto } = useAppSelector((state) => state.photoFilms);
+  const {
+    page: pageReviews,
+    comments,
+    pages,
+    status,
+    isEnd,
+  } = useAppSelector((state) => state.reviews);
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchPhotoFilms({ id: id, page: page }));
+      dispatch(resetPhotoContent(id));
+      dispatch(resetReviewsContent(id));
+      dispatch(fetchPhotoFilms({ id: id, page: pagePhoto }));
+      dispatch(fetchReviews({ id: id, page: pageReviews }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (id && inView && pageR < pages) {
-      dispatch(fetchReviews({ id: id, page: pageR }));
+    if (id && inView && pageReviews < pages) {
+      dispatch(fetchReviews({ id: id, page: pageReviews }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
-
-  const hasPagination = film.persons.length > 10;
-
-  const columns = [
-    {
-      title: "Имя",
-      dataIndex: "name",
-      key: "name",
-      render: (text: string) => <p>{text}</p>,
-    },
-    {
-      title: "Фото",
-      dataIndex: "photo",
-      key: "photo",
-      render: (text: string) => (
-        <Image width={windowWidth > 420 ? 80 : 40} src={text} />
-      ),
-    },
-    {
-      title: "Профессия",
-      dataIndex: "profession",
-      key: "profession",
-      render: (text: string) => <p>{text}</p>,
-    },
-  ];
-
-  // const b = (value: number) => {
-  //   if (value % 4 === 0) {
-  //     if (id && !isEnd)
-  //       dispatch(fetchPhotoFilms({ id: id, page: page + 1 }));
-  //   }
-  // };
 
   return (
     <>
-      <div className={styles.main}>
-        <h2 className={styles.h2}>Постеры:</h2>
-
-        {status === "fulfilled" && photo ? (
-          <>
-            {photo.length}
-            <CarouselComponent content={photo} />
-          </>
-        ) : (
-          <h3 className={styles.h3}>Постеры не найдены...</h3>
-        )}
+      <PosterCard />
+      <ActorsCard film={film} />
+      {comments?.map((comment) => (
+        <ReviewCard comment={comment} key={comment.id} />
+      ))}
+      <div ref={ref} className="loader">
+        <LoaderError status={status} isFull={isEnd} />
       </div>
-
-      <div className={styles.persons}>
-        <Table
-          dataSource={film.persons}
-          columns={columns}
-          pagination={
-            hasPagination ? { pageSize: 10, position: ["bottomCenter"] } : false
-          }
-        />
-      </div>
-      <div>
-        {comments?.map((el) => (
-          <div>{el.author}</div>
-        ))}
-      </div>
-
-      <div ref={ref}></div>
+      <ButtonTop />
     </>
   );
 };
