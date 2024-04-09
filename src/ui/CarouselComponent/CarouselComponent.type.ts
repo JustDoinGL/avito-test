@@ -1,6 +1,8 @@
+import { ReactNode } from "react"
 import { Photo } from "../../@types/photoFilms"
 
 export type CarouselComponentProps = {
   content: Photo[]
-  beforeChange: () => void
+  // children: ReactNode
+  // beforeChange: (value:number) => void
 }

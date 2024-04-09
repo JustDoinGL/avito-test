@@ -9,6 +9,9 @@ const photoFilmsSlice = createSlice({
 	reducers: {
 		setIsEnd: (state) => {
 			state.isEnd = true
+		},
+		setPhoto: (state) => {
+			state.photo = []
 		}
 	},
 	extraReducers: builder => {
@@ -35,4 +38,4 @@ const photoFilmsSlice = createSlice({
 
 export default photoFilmsSlice.reducer
 
-export const { setIsEnd, } = photoFilmsSlice.actions
+export const { setIsEnd, setPhoto} = photoFilmsSlice.actions
