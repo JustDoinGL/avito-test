@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, InputNumber } from "antd";
-import InputText from "../../ui/inputText/InputText";
+import { AutoComplete, Button, InputNumber } from "antd";
 import styles from "./SearchFilms.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -9,6 +8,7 @@ import {
   setLimit,
   setPage,
   setResetForm,
+  setSearchWords,
   setValueSearch,
 } from "../../redux/films/filmsSlice";
 import { useEffect, useState } from "react";
@@ -22,6 +22,7 @@ const SearchMain = () => {
   const {
     limit,
     valueSearch,
+    searchWords,
     isValueSearchChange,
     ageLint,
     cityLint,
@@ -33,10 +34,11 @@ const SearchMain = () => {
   useEffect(() => {
     dispatch(setCardSkeleton(true));
     let timerId: string | number | NodeJS.Timeout | undefined;
-    if (isValueSearchChange || valueSearch) {
+    if (isValueSearchChange) {
       timerId = setTimeout(() => {
         dispatch(setPage(1));
         dispatch(fetchSearchFilms({ page: 1, limit, query: valueSearch }));
+        dispatch(setSearchWords({ value: valueSearch }));
       }, 1000);
     }
 
@@ -71,16 +73,21 @@ const SearchMain = () => {
   const resetForm = () => {
     dispatch(setResetForm());
   };
-
+  
   return (
     <div className={styles.container}>
-      <InputText
-        placeholder="Поиск по названию"
-        type="text"
-        className={styles.input}
+      <AutoComplete
+        style={{ width: 300 }}
+        options={searchWords}
         onChange={changeValueSearch}
         value={valueSearch}
+        placeholder="Поиск по названию"
+        filterOption={(inputValue, searchWords) =>
+          searchWords!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+          -1
+        }
       />
+
       <Button
         className={styles.button}
         type="primary"

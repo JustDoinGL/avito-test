@@ -6,30 +6,29 @@ const ButtonTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const scrollToTop = () => {
-    console.log('Button clicked');
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
 
-  // useEffect(() => {
-  //   const toggleVisibility = () => {
-  //     if (window.pageYOffset > 300) {
-  //       setIsVisible(true);
-  //     } else {
-  //       setIsVisible(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-  //   window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
 
-  //   return () => window.removeEventListener("scroll", toggleVisibility);
-  // }, []);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
   
   return (
     <>
-      {true ? (
+      {isVisible ? (
         <div className={styles.scroll}>
           <p onClick={scrollToTop}>
             <ArrowUpOutlined />

@@ -17,6 +17,7 @@ type FilmsState = {
 	ratingLint: RatingLint
 	isCardSkeleton: boolean
 	isValueSearchChange: boolean
+	searchWords: { value: string }[]
 }
 
 const favoriteFilmsFromStorage = localStorage.getItem('favoriteFilms');
@@ -37,5 +38,6 @@ export const initialState: FilmsState = {
 	ratingLint: RatingLint.Start,
 	isCardSkeleton: false,
 	isValueSearchChange: false,
+	searchWords: [{ value: 'Игра пристолов' }, { value: 'Железный человек' }]
 }
 

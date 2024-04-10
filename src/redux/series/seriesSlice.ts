@@ -10,8 +10,11 @@ const seriesSlice = createSlice({
 		resetSeriesContent: (state, action: PayloadAction<string>) => {
 			if (state.id === action.payload) {
 				state.series = []
+				state.page = 1
 			} else {
 				state.id = action.payload
+				state.series = []
+				state.page = 1
 			}
 		},
 		setPage: (state, action: PayloadAction<number>) => {
@@ -26,6 +29,7 @@ const seriesSlice = createSlice({
 			.addCase(fetchSeries.fulfilled, (state, action) => {
 				state.series = [...state.series, ...action.payload.docs]
 				state.pages = action.payload.pages
+				state.total = action.payload.total
 				state.page += 1
 				state.status = Status.fulfilled;
 			})

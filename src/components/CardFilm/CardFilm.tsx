@@ -4,11 +4,18 @@ import RateStar from "../../ui/rateStar/RateStar";
 import { Link } from "react-router-dom";
 import Img from "../../ui/img/Img";
 import { useWindowWidth } from "../../hooks/useResize";
+import { useAppDispatch } from "../../hooks/redux";
+import { setIsValueSearchChange } from "../../redux/films/filmsSlice";
 
 export const CardFilm = ({ film }: CardFilmProps) => {
   const width = useWindowWidth();
+  const dispatch = useAppDispatch();
   return (
-    <Link to={`/film/${film.id}`} className={styles.filmCard}>
+    <Link
+      to={`/film/${film.id}`}
+      className={styles.filmCard}
+      onClick={() => dispatch(setIsValueSearchChange(false))}
+    >
       <Img
         src={film.poster.url}
         alt={film?.name || ""}

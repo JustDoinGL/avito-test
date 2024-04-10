@@ -48,14 +48,14 @@ const SeriesList = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useAppDispatch();
   const carouselRef = React.useRef<any>(null);
-  const { page, series, status, id } = useAppSelector((store) => store.series);
+  const { page, series, total, id } = useAppSelector((store) => store.series);
 
   const handleLoadMore = async () => {
     await dispatch(fetchSeries({ page: page, id: id }));
   };
 
   const handleChange = async (current: number) => {
-    if (current === series.length - 1) {
+    if (current === series.length - 1 && !(total <= series.length)) {
       await handleLoadMore();
       carouselRef.current.goTo(current, false);
     }
@@ -69,7 +69,7 @@ const SeriesList = () => {
     carouselRef.current.next();
   };
 
-  if (status === "fulfilled") {
+  if (series.length > 0) {
     return (
       <div>
         <h2 className="h2">Серии</h2>
@@ -97,7 +97,7 @@ const SeriesList = () => {
   }
 
   return (
-    <div>
+    <div className={styles.carousel}>
       <h2 className="h2">Серии</h2>
       <Skeleton
         width={windowWidth > 768 ? windowWidth - 150 : windowWidth - 15}

@@ -50,9 +50,20 @@ const filmsSlice = createSlice({
 			state.ageFilmLint = action.payload.ageFilmLint.length === 0 ? FilmAgeLint.Start : action.payload.ageFilmLint
 			state.cityLint = action.payload.cityLint.length === 0 ? CountryLint.Start : action.payload.cityLint
 		},
+		setSearchWords: (state, action: PayloadAction<{ value: string }>) => {
+			const isCopy = state.searchWords.some(word => word.value.toLocaleLowerCase() === action.payload.value.toLocaleLowerCase())
+			if (action.payload.value.length > 0 && !isCopy) {
+				if (state.searchWords.length < 20) {
+					state.searchWords.push(action.payload)
+				} else {
+					state.searchWords.shift();
+					state.searchWords.push(action.payload);
+				}
+			}
+		},
 		setCardSkeleton: (state, action: PayloadAction<boolean>) => {
 			state.isCardSkeleton = action.payload
-		}
+		},
 		// setFavoritefilms: (state, action: PayloadAction<Films>) => {
 		// 	const user = action.payload;
 		// 	const index = state.favoritefilms.findIndex((userId) => userId === user.id);
@@ -128,8 +139,8 @@ const filmsSlice = createSlice({
 				state.isFull = false
 				state.page = 1
 				const filmsData = action.payload.docs;
-				state.isFull = filmsData.length === 0;
 				state.films = filmsData
+				state.isFull = filmsData.length === 0;
 				state.page++;
 				state.status = Status.fulfilled
 				state.isCardSkeleton = false
@@ -144,5 +155,5 @@ const filmsSlice = createSlice({
 
 export default filmsSlice.reducer
 
-export const { setLimit, setIsValueSearchChange, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
+export const { setLimit, setIsValueSearchChange, setSearchWords, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
 

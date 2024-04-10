@@ -82,11 +82,12 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "link active" : "link"
                 }
+                onClick={onClose}
               >
                 Главная
               </NavLink>
             )}
-            <LoginLogOut />
+            <LoginLogOut onClick={onClose} />
             <ThemeChange />
           </div>
         </Drawer>

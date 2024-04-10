@@ -6,13 +6,12 @@ const PosterCard = () => {
   const { photo, status } = useAppSelector((state) => state.photoFilms);
   return (
     <div className={styles.main}>
-      <h2 className='h2'>Постеры:</h2>
-      {status !== "rejected" && photo ? (
+      <h2 className="h2">Постеры:</h2>
+      {status !== "rejected" && photo.length > 0 ? (
+        
         <CarouselComponent content={photo} />
       ) : (
-        <h3 className='h3'>
-          {status === "pending" ? "Загрузка..." : "Постеры не найдены..."}
-        </h3>
+        <h3 className="h3">Постеры не найдены...</h3>
       )}
     </div>
   );

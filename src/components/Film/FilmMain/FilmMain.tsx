@@ -27,7 +27,9 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
     status,
     isEnd,
   } = useAppSelector((state) => state.reviews);
-  const { page: pageSeries, pages:pagesSeries } = useAppSelector((state) => state.series);
+  const { pages: pagesSeries } = useAppSelector(
+    (state) => state.series
+  );
 
   useEffect(() => {
     if (id) {
@@ -35,7 +37,7 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
       dispatch(resetSeriesContent(id));
       dispatch(resetReviewsContent(id));
       dispatch(fetchPhotoFilms({ id: id, page: pagePhoto }));
-      dispatch(fetchSeries({ id: id, page: pageSeries }));
+      dispatch(fetchSeries({ id: id, page: 1 }));
       dispatch(fetchReviews({ id: id, page: pageReviews }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,11 +51,13 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
   }, [inView]);
 
   return (
-    <>
+    <div>
       <PosterCard />
       <ActorsCard film={film} />
       {pagesSeries > 0 && <SeriesList />}
 
+      <h2 className="h2">Комментарии</h2>
+      {comments.length === 0 && <h3 className="h3">Комментариев нет...</h3>}
       {comments?.map((comment) => (
         <ReviewCard comment={comment} key={comment.id} />
       ))}
@@ -61,7 +65,7 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
         <LoaderError status={status} isFull={isEnd} />
       </div>
       <ButtonTop />
-    </>
+    </div>
   );
 };
 
