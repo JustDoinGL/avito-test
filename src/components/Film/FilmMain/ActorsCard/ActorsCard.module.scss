@@ -2,3 +2,17 @@
   width: 100%;
   margin-top: 20px;
 }
+
+.dark {
+  :global {
+    .ant-pagination-item a {
+      color: white;
+    }
+    .ant-pagination-item-active a {
+      color: blue;
+    }
+    .anticon svg {
+      fill: white;
+    }
+  }
+}

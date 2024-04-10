@@ -1,4 +1,4 @@
-import { Review } from '../../@types/reviews';
+import { Series } from '../../@types/series';
 import { Status } from '../@types/enum';
 
 type SeriesState = {
@@ -6,7 +6,7 @@ type SeriesState = {
   page: number
   pages: number
   isEnd: boolean
-  series: Review[]
+  series: Series[]
   id: string
 };
 

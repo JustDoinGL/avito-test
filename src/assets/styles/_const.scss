@@ -34,6 +34,17 @@
   }
 }
 
+.active {
+  margin-left: 20px;
+  text-decoration: none;
+  color: gold;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--link-color);
+  }
+}
+
 .theme-button {
   cursor: pointer;
   background-color: transparent;
@@ -52,6 +63,9 @@
 
 .h2 {
   font-size: 22px;
+  line-height: 26px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-weight: 700;
   text-align: center;
 }

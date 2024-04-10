@@ -17,36 +17,40 @@ function App() {
         <Route path={`/`} element={<DefaultLayout />}>
           <Route index element={<MainPage />} />
           <Route path={`/film/:id`} element={<FilmPage />} />
-        </Route>
+          <Route
+            path={`/favorites`}
+            element={
+              <RequireAuth>
+                <p>favorites</p>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={`/random-film`}
+            element={
+              <RequireAuth>
+                <p>ffff</p>
+              </RequireAuth>
+            }
+          />
 
-        <Route
-          path="/auth"
-          element={
-            <NeedAuth>
-              <AuthPage />
-            </NeedAuth>
-          }
-        />
+          <Route
+            path="/auth"
+            element={
+              <NeedAuth>
+                <AuthPage />
+              </NeedAuth>
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            <NeedAuth>
-              <SingUpPage />
-            </NeedAuth>
-          }
-        />
-
-        <Route
-          path="/catalog"
-          element={
-            <RequireAuth>
-              <DefaultLayout />
-            </RequireAuth>
-          }
-        >
-          {/* <Route index element={<CatalogPage />} />
-          <Route path="/catalog/:id" element={<UserPage />} /> */}
+          <Route
+            path="/login"
+            element={
+              <NeedAuth>
+                <SingUpPage />
+              </NeedAuth>
+            }
+          />
         </Route>
       </Routes>
     </div>

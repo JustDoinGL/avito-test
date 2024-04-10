@@ -17,8 +17,9 @@ const FilmPage = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchFilm({ id }));
-      window.scrollTo(0, 0);
+      dispatch(fetchFilm({ id })).then(() => {
+        window.scrollTo(0, 0);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -13,6 +13,9 @@ const seriesSlice = createSlice({
 			} else {
 				state.id = action.payload
 			}
+		},
+		setPage: (state, action: PayloadAction<number>) => {
+			state.page = action.payload
 		}
 	},
 	extraReducers: (builder) => {
@@ -34,6 +37,6 @@ const seriesSlice = createSlice({
 
 export default seriesSlice.reducer;
 
-export const { resetSeriesContent } = seriesSlice.actions;
+export const { resetSeriesContent, setPage } = seriesSlice.actions;
 
 

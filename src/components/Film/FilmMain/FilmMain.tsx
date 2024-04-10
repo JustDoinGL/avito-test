@@ -13,7 +13,7 @@ import ButtonTop from "../../../ui/buttonTop/ButtonTop";
 import { useInView } from "react-intersection-observer";
 import { resetSeriesContent } from "../../../redux/series/seriesSlice";
 import { fetchSeries } from "../../../redux/series/getSeries";
-import SeriesCard from "./SeriesCard/SeriesCard";
+import SeriesList from "./SeriesCard/SeriesCard";
 
 const FilmMain = ({ film, id }: FilmMainProps) => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
     status,
     isEnd,
   } = useAppSelector((state) => state.reviews);
-  const { page: pageSeries, series } = useAppSelector((state) => state.series);
+  const { page: pageSeries, pages:pagesSeries } = useAppSelector((state) => state.series);
 
   useEffect(() => {
     if (id) {
@@ -52,10 +52,11 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
     <>
       <PosterCard />
       <ActorsCard film={film} />
+      {pagesSeries > 0 && <SeriesList />}
+
       {comments?.map((comment) => (
         <ReviewCard comment={comment} key={comment.id} />
       ))}
-      {/* {series && <SeriesCard film={series} />} */}
       <div ref={ref} className="loader">
         <LoaderError status={status} isFull={isEnd} />
       </div>

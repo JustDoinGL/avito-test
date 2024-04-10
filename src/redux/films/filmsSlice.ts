@@ -115,6 +115,8 @@ const filmsSlice = createSlice({
 				state.isCardSkeleton = false
 			})
 			.addCase(fetchFilmsFilter.rejected, state => {
+				state.page = 1
+				state.films = []
 				state.status = Status.rejected
 			})
 
@@ -133,6 +135,8 @@ const filmsSlice = createSlice({
 				state.isCardSkeleton = false
 			})
 			.addCase(fetchSearchFilms.rejected, state => {
+				state.page = 1
+				state.films = []
 				state.status = Status.rejected
 			})
 	}

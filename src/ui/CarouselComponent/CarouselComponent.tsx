@@ -14,7 +14,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ content }) => {
       autoplaySpeed={2000}
     >
       {content.map((item) => (
-        <div key={item.movieId} className={styles.imageContainer}>
+        <div key={item.id} className={styles.imageContainer}>
           <p className={styles.text}>{item.createdAt}</p>
           <Img
             className={`${styles.imageContainer} ${styles.image}`}

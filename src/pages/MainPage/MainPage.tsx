@@ -69,7 +69,7 @@ const MainPage = () => {
         })
       );
     } else {
-      dispatch(fetchFilms({ page: 1, limit: 10 }));
+      films.length === 0 && dispatch(fetchFilms({ page: 1, limit: 10 }));
     }
   }, []);
 
@@ -118,10 +118,10 @@ const MainPage = () => {
       {films?.map((film) => (
         <CardFilm film={film} key={film.id} />
       ))}
+      <ButtonTop />
       <div ref={ref} className="loader">
         <LoaderError status={status} isFull={isFull} />
       </div>
-      <ButtonTop />
     </div>
   );
 };

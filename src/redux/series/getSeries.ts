@@ -11,7 +11,7 @@ export const fetchSeries = createAsyncThunk<any, TSeries>(
 	'series/fetchSeries',
 	async function ({ id, page }, { rejectWithValue }) {
 		try {
-			const response = await axios.get(`https://api.kinopoisk.dev/v1.4/season?page=${page}&limit=10&movieId=${id}`, {
+			const response = await axios.get(`https://api.kinopoisk.dev/v1.4/season?page=${page}&limit=5&movieId=${id}`, {
 				headers: {
 					'X-API-KEY': process.env.REACT_APP_TOKEN,
 					'Accept': 'application/json',

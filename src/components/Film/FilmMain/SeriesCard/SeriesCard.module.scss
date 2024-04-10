@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll; 
+  height: 550px;
+}
+
+.card img {
+  max-height: 90%;
+  width: auto; 
+  object-fit: contain;
+}
