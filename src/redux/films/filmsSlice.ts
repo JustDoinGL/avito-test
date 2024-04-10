@@ -50,8 +50,8 @@ const filmsSlice = createSlice({
 			state.ageFilmLint = action.payload.ageFilmLint.length === 0 ? FilmAgeLint.Start : action.payload.ageFilmLint
 			state.cityLint = action.payload.cityLint.length === 0 ? CountryLint.Start : action.payload.cityLint
 		},
-		setCardSkeleton: (state) => {
-			state.isCardSkeleton = !state.isCardSkeleton
+		setCardSkeleton: (state, action: PayloadAction<boolean>) => {
+			state.isCardSkeleton = action.payload
 		}
 		// setFavoritefilms: (state, action: PayloadAction<Films>) => {
 		// 	const user = action.payload;

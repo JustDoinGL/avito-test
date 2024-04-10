@@ -21,3 +21,15 @@
 .spanRight {
   color: red;
 }
+
+.eye {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  color: var(--gray-color);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--violet-color);
+  }
+}

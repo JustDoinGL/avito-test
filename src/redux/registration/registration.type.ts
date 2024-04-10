@@ -1,5 +1,10 @@
 import { Status } from '../@types/enum';
 
+export type UsersPasswordLogin = {
+  login: string
+  password: string
+}
+
 type RegistrationState = {
   token: string | null,
   name: string,
@@ -12,6 +17,8 @@ type RegistrationState = {
   isPassword: boolean,
   isTwoPassword: boolean,
   password2: string
+  usersLogin: UsersPasswordLogin[]
+  isWrongPasswordOrLogin: boolean
 };
 
 export const initialState: RegistrationState = {
@@ -25,5 +32,7 @@ export const initialState: RegistrationState = {
   isName: true,
   isPassword: true,
   isTwoPassword: true,
-  password2: ''
+  password2: '',
+  usersLogin: [{ password: 'admin1234', login: 'admin@mail.ru' }],
+  isWrongPasswordOrLogin: false,
 };

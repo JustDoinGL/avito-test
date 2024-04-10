@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import { setDisabled, setEmail, setName, setPassword, setPassword2 } from "../redux/registration/registrationSlice";
+import { useEffect, useMemo } from "react";
+import { setDisabled, setEmail, setIsWrongPassOrLogin, setName, setPassword, setPassword2 } from "../redux/registration/registrationSlice";
 import { useAppDispatch, useAppSelector } from "./redux";
+import { TForm } from "../components/AuthForm/AuthForm.type";
 
-export const useFormControls = () => {
+export const useFormControls = (form: TForm) => {
   const dispatch = useAppDispatch();
   const {
     email,
@@ -16,7 +17,7 @@ export const useFormControls = () => {
   } = useAppSelector(store => store.registration);
 
   useEffect(() => {
-    dispatch(setDisabled())
+    dispatch(setDisabled(form))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEmail, isName, isPassword, isTwoPassword]);
 
@@ -25,14 +26,14 @@ export const useFormControls = () => {
   const passwordControl = (value: string) => dispatch(setPassword(value));
   const password2Control = (value: string) => dispatch(setPassword2(value));
 
-  const inputFields = [
+  const inputFields = useMemo(() => [
     {
       label: "Имя",
       helper: "Слишком короткое имя",
       value: name,
       type: "text",
       isRight: isName,
-      onChang: nameControl,
+      onChange: nameControl,
       placeholder: "Введите ваше имя...",
     },
     {
@@ -41,7 +42,7 @@ export const useFormControls = () => {
       value: email,
       type: "email",
       isRight: isEmail,
-      onChang: emailControl,
+      onChange: emailControl,
       placeholder: "Введите вашу почту...",
     },
     {
@@ -50,7 +51,7 @@ export const useFormControls = () => {
       value: password,
       type: "password",
       isRight: isPassword,
-      onChang: passwordControl,
+      onChange: passwordControl,
       placeholder: "Придумайте пароль",
     },
     {
@@ -59,10 +60,16 @@ export const useFormControls = () => {
       value: password2,
       type: "password",
       isRight: isTwoPassword,
-      onChang: password2Control,
+      onChange: password2Control,
       placeholder: "Повторите пароль",
     },
-  ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  ], [name, isName, email, isEmail, password, isPassword, password2, isTwoPassword]);
 
-  return inputFields;
+  if (form === 'registration') {
+    return inputFields;
+  } else {
+    return [inputFields[1], inputFields[2]]
+  }
+
 };

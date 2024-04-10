@@ -6,6 +6,7 @@ import FilmPage from "./pages/FilmPage/FilmPage";
 import { NeedAuth } from "./hoc/NeedAuth";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthPage } from "./pages/AuthPage/AuthPage";
+import { SingUpPage } from "./pages/SingUpPage/SingUpPage";
 
 function App() {
   const { value: theme } = useAppSelector((state) => state.theme);
@@ -17,11 +18,21 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path={`/film/:id`} element={<FilmPage />} />
         </Route>
+
         <Route
           path="/auth"
           element={
             <NeedAuth>
               <AuthPage />
+            </NeedAuth>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <NeedAuth>
+              <SingUpPage />
             </NeedAuth>
           }
         />

@@ -31,7 +31,7 @@ const SearchMain = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    dispatch(setCardSkeleton());
+    dispatch(setCardSkeleton(true));
     let timerId: string | number | NodeJS.Timeout | undefined;
     if (isValueSearchChange || valueSearch) {
       timerId = setTimeout(() => {
@@ -54,7 +54,7 @@ const SearchMain = () => {
   const submitForm = () => {
     dispatch(setValueSearch(""));
     dispatch(setIsValueSearchChange(false));
-    dispatch(setCardSkeleton());
+    dispatch(setCardSkeleton(true));
     dispatch(setPage(1));
     dispatch(
       fetchFilmsFilter({
@@ -81,7 +81,11 @@ const SearchMain = () => {
         onChange={changeValueSearch}
         value={valueSearch}
       />
-      <Button className={styles.button} type="primary" onClick={() => setIsModalVisible(true)}>
+      <Button
+        className={styles.button}
+        type="primary"
+        onClick={() => setIsModalVisible(true)}
+      >
         Дополнительные настройки поиска
       </Button>
       <ModalUI

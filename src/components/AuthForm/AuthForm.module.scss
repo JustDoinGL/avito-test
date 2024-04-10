@@ -1,5 +1,6 @@
 .form {
   display: flex;
+  background: var(--secondary-bg-color);
   flex-direction: column;
   padding: 16px;
   gap: 16px;
@@ -12,10 +13,9 @@
   line-height: 23px;
 }
 
-
 .button {
   width: 100%;
-  background: var(--black-color);
+  background: var(--link-color);
   border-radius: 8px;
   padding: 8px 12px;
 
@@ -29,7 +29,7 @@
   }
 
   &:disabled {
-    background: var(--gray-color);
+    background: #7777ff;
     cursor: not-allowed;
     &:hover {
       color: var(--white-color);

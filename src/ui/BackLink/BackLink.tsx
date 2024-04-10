@@ -3,11 +3,12 @@ import styles from "./BackLink.module.scss";
 import { BackLinkProps } from "./BackLink.type";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
-const BackLink = ({ text = "Назад" }: BackLinkProps) => {
+const BackLink = ({ text = "Назад", onBack }: BackLinkProps) => {
   const navigate = useNavigate();
 
   function handleBack() {
     navigate(-1);
+    if (onBack) onBack();
   }
 
   return (

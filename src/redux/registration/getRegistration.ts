@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { Registration } from '../../@types/registration'
 
-type TRegistration = {
+export type TRegistration = {
 	email: string,
 	password: string,
 }
