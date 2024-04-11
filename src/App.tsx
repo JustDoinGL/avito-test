@@ -7,6 +7,7 @@ import { NeedAuth } from "./hoc/NeedAuth";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { SingUpPage } from "./pages/SingUpPage/SingUpPage";
+import NotFoundPage from "./pages/404/NotFoundPage";
 
 function App() {
   const { value: theme } = useAppSelector((state) => state.theme);
@@ -52,6 +53,8 @@ function App() {
             }
           />
         </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

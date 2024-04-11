@@ -8,7 +8,7 @@ import {
   FilmHeaderSkeleton,
   FilmMain,
 } from "../../components/Film";
-import NotFound from "../404/NotFound";
+import NotFoundPage from "../404/NotFoundPage";
 
 const FilmPage = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const FilmPage = () => {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   if (film && status === "fulfilled") {
     return (
@@ -42,7 +42,7 @@ const FilmPage = () => {
   }
   return (
     <>
-      {status === "rejected" && <NotFound />}
+      {status === "rejected" && <NotFoundPage />}
       <div className={`container ${styles.film}`}>
         {status === "pending" && <FilmHeaderSkeleton />}
       </div>

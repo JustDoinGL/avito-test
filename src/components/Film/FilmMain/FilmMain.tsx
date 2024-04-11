@@ -14,12 +14,16 @@ import { useInView } from "react-intersection-observer";
 import { resetSeriesContent } from "../../../redux/series/seriesSlice";
 import { fetchSeries } from "../../../redux/series/getSeries";
 import SeriesList from "./SeriesCard/SeriesCard";
+import { resetSimilarFilmsContent, setContent } from "../../../redux/similarFilms/similarFilmsSlice";
+import { fetchSimilarFilms } from "../../../redux/similarFilms/getSimilarFilms";
+import SimilarFilmsCard from "./SimilarsFilmsCard/SimilarFilmsCard";
 
 const FilmMain = ({ film, id }: FilmMainProps) => {
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView();
 
   const { page: pagePhoto } = useAppSelector((state) => state.photoFilms);
+  const { page: pageSimilarFilms } = useAppSelector((state) => state.similarFilms);
   const {
     page: pageReviews,
     comments,
@@ -31,14 +35,20 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
     (state) => state.series
   );
 
+  const similar = film.genres.map((genre) => genre.name)
+
   useEffect(() => {
     if (id) {
       dispatch(resetPhotoContent(id));
       dispatch(resetSeriesContent(id));
       dispatch(resetReviewsContent(id));
+      dispatch(resetSimilarFilmsContent(id));
       dispatch(fetchPhotoFilms({ id: id, page: pagePhoto }));
       dispatch(fetchSeries({ id: id, page: 1 }));
       dispatch(fetchReviews({ id: id, page: pageReviews }));
+      dispatch(fetchSimilarFilms({ similar, page: pageSimilarFilms }));
+
+      dispatch(setContent(similar))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,6 +65,8 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
       <PosterCard />
       <ActorsCard film={film} />
       {pagesSeries > 0 && <SeriesList />}
+
+      {pageSimilarFilms > 0 && <SimilarFilmsCard />}
 
       <h2 className="h2">Комментарии</h2>
       {comments.length === 0 && <h3 className="h3">Комментариев нет...</h3>}

@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.carousel {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll; 
+  height: 550px;
+}
+
+.card img {
+  max-height: 90%;
+  width: auto; 
+  object-fit: contain;
+}
+
+.button {
+  display: flex;
+  justify-content: space-evenly;
+}

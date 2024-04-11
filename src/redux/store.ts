@@ -5,6 +5,7 @@ import photoFilmsSlice from './photoFilms/photoFilmsSlice'
 import reviewsSlice from './reviews/reviewsSlice'
 import seriesSlice from './series/seriesSlice'
 import registrationSlice from './registration/registrationSlice'
+import similarFilmsSlice from './similarFilms/similarFilmsSlice'
 
 const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
 		reviews: reviewsSlice,
 		series: seriesSlice,
 		registration: registrationSlice,
+		similarFilms: similarFilmsSlice,
 	}
 })
 

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchRegistration } from "../../redux/registration/getRegistration";
 import styles from "./AuthForm.module.scss";
 import Item from "./Item/Item";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   isLoading,
   setAddNewUser,
@@ -52,9 +52,17 @@ const AuthForm = ({ form }: AuthFormProps) => {
   return (
     <>
       <form className={styles.form} typeof="submit">
-        <h1 className={styles.title}>
-          {form === "registration" ? "Регистрация" : "Вход"}
-        </h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            {form === "registration" ? "Регистрация" : "Вход"}
+          </h1>
+          <Link
+            to={form === "registration" ? "/login" : "/auth"}
+            className="link"
+          >
+            {form === "registration" ? "Есть аккаунт" : "Зарегестрироваться"}
+          </Link>
+        </div>
         {status === Status.rejected && (
           <ErrorMessage errorMessage={"Произошла ошибка"} />
         )}

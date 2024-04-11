@@ -12,7 +12,7 @@ const SingUpPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <BackLink onBack={handleClick} />
+        <BackLink onBack={handleClick} back={'/'} />
         <AuthForm form="entrance" />
       </div>
     </div>

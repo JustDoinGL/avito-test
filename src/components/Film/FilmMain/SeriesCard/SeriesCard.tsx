@@ -12,6 +12,7 @@ const EpisodeCard: React.FC<{ episodes: Episode[] }> = ({ episodes }) => (
   <Collapse accordion defaultActiveKey={["1"]}>
     {episodes.map((episode, index) => (
       <Panel header={episode.name} key={index}>
+        <h3 className="h3">{episode.enName}</h3>
         <p>{episode.description}</p>
       </Panel>
     ))}
@@ -32,11 +33,15 @@ const SeriesCard: React.FC<{ series: Series }> = ({ series }) => {
       className={styles.card}
     >
       <Space direction="vertical" size="large" align="center">
-        <img
-          alt={`Poster for ${series.description}`}
-          src={series.poster.previewUrl}
-          style={{ maxHeight: "90%" }}
-        />
+        {series?.poster?.url?.length > 0 ? (
+          <img
+            alt={`Poster for ${series.description}`}
+            src={series.poster.url}
+            style={{ maxHeight: "90%" }}
+          />
+        ) : (
+          <Skeleton width={300} height={450} />
+        )}
         <Card.Meta title={series.name} description={series.description} />
         <EpisodeCard episodes={series.episodes} />
       </Space>

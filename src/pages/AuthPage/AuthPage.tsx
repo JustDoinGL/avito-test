@@ -12,7 +12,7 @@ const AuthPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <BackLink onBack={handleClick} />
+        <BackLink onBack={handleClick} back={"/"} />
         <AuthForm form="registration" />
       </div>
     </div>
