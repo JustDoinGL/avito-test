@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10xp;
+}
+
+.star {
+  cursor: pointer;
+  margin: 10px 0;
+  &:hover {
+    color: gold;
+  }
+}
+
+.register {
+  display: flex;
+  margin: 10px auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

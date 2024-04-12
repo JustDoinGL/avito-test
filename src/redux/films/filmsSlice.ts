@@ -64,21 +64,22 @@ const filmsSlice = createSlice({
 		setCardSkeleton: (state, action: PayloadAction<boolean>) => {
 			state.isCardSkeleton = action.payload
 		},
-		// setFavoritefilms: (state, action: PayloadAction<Films>) => {
-		// 	const user = action.payload;
-		// 	const index = state.favoritefilms.findIndex((userId) => userId === user.id);
-		// 	if (index !== -1) {
-		// 		state.favoritefilms = state.favoritefilms.filter((userId) => userId !== user.id);
-		// 	} else {
-		// 		state.favoritefilms.push(user.id);
-		// 	}
+		setFavoriteFilms: (state, action: PayloadAction<number>) => {
+			const id = action.payload;
+			const index = state.favoriteFilms.findIndex((filmId) => filmId === id);
+			if (index !== -1) {
+				state.favoriteFilms = state.favoriteFilms.filter((filmId) => filmId !== id);
+				state.favoriteFilmsState = state.favoriteFilmsState.filter((film) => film.id !== id)
+			} else {
+				state.favoriteFilms.push(id);
+			}
 
-		// 	localStorage.setItem('favoritefilms', JSON.stringify(state.favoritefilms));
-		// },
-		// clearFavoritefilms: (state) => {
-		// 	state.favoritefilms = [];
-		// 	localStorage.removeItem('favoritefilms');
-		// }
+			localStorage.setItem('favoriteFilms', JSON.stringify(state.favoriteFilms));
+		},
+		clearFavoriteFilms: (state) => {
+			state.favoriteFilms = [];
+			localStorage.removeItem('favoriteFilms');
+		}
 	},
 	extraReducers: builder => {
 		builder
@@ -105,6 +106,11 @@ const filmsSlice = createSlice({
 			})
 			.addCase(fetchFilm.fulfilled, (state, action) => {
 				state.film = action.payload;
+				if (state.favoriteFilms.includes(action.payload.id)) {
+					if (!state.favoriteFilmsState.some((el) => el.id === action.payload.id)) {
+						state.favoriteFilmsState.push(action.payload)
+					}
+				}
 				state.status = Status.fulfilled;
 			})
 			.addCase(fetchFilm.rejected, state => {
@@ -155,5 +161,5 @@ const filmsSlice = createSlice({
 
 export default filmsSlice.reducer
 
-export const { setLimit, setIsValueSearchChange, setSearchWords, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
+export const { setLimit, setIsValueSearchChange, setFavoriteFilms, clearFavoriteFilms, setSearchWords, setPage, setCardSkeleton, setResetForm, setParams, setValueSearch, setRatingLint, setAgeFilmLint, setAgeLint, setCityLint } = filmsSlice.actions
 

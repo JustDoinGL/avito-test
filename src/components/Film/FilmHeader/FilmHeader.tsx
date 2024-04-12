@@ -1,3 +1,4 @@
+import FeaturedContent from "../../../common/FeaturedContent/FeaturedContent";
 import { formatLength } from "../../../helpers/formatLengthMovie";
 import { useWindowWidth } from "../../../hooks/useResize";
 import BackLink from "../../../ui/backLink/BackLink";
@@ -7,7 +8,7 @@ import styles from "./FilmHeader.module.scss";
 import { FilmHeaderProps } from "./FilmHeader.type";
 
 const FilmHeader = (props: FilmHeaderProps) => {
-  const { slogan, poster, description, rating, name, length, year } = props;
+  const { slogan, poster, description, id, rating, name, length, year } = props;
   const windowWidth = useWindowWidth();
   const isLargeScreen = windowWidth > 768;
   const imageSize = isLargeScreen
@@ -36,6 +37,7 @@ const FilmHeader = (props: FilmHeaderProps) => {
         />
         <div className={styles.info}>
           {name && <h2 className={styles.h2}>{name}</h2>}
+          <FeaturedContent id={id} />
           {year && <p>Год выхода - {year}</p>}
           {length && <p>Продолжительность: {formatLength(length)} </p>}
           {renderRating("Рейтинг критиков", rating.filmCritics)}

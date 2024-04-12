@@ -8,4 +8,5 @@ export type FilmHeaderProps = {
   name: string
   length: number
   year: number
+  id: number
 }

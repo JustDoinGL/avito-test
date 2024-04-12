@@ -4,6 +4,7 @@ import { clearToken } from "../../redux/registration/registrationSlice";
 import { Button } from "antd";
 import styles from "./LoginLogOut.module.scss";
 import { LoginLogOutProps } from "./LoginLogOut.type";
+import { clearFavoriteFilms } from "../../redux/films/filmsSlice";
 
 const LoginLogOut = ({ onClick }: LoginLogOutProps) => {
   const dispatch = useAppDispatch();
@@ -14,8 +15,7 @@ const LoginLogOut = ({ onClick }: LoginLogOutProps) => {
     dispatch(clearToken());
     navigate("/");
     if (onClick) onClick();
-    // TODO: добавить удаление избранных юзеров
-    // dispatch(clearFavoriteUsers());
+    dispatch(clearFavoriteFilms());
   };
 
   const handleClickSignIn = () => {

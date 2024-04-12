@@ -28,6 +28,7 @@ const FilmPage = () => {
     return (
       <div className={`container ${styles.film}`}>
         <FilmHeader
+          id={film.id}
           name={film?.name}
           slogan={film.slogan}
           poster={film.poster.url}

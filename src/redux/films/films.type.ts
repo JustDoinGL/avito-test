@@ -10,6 +10,7 @@ type FilmsState = {
 	page: number
 	limit: number
 	favoriteFilms: number[]
+	favoriteFilmsState: FilmID[]
 	valueSearch: string
 	ageLint: AgeLint
 	cityLint: CountryLint
@@ -25,6 +26,7 @@ const defaultFavoriteFilms: number[] = favoriteFilmsFromStorage ? JSON.parse(fav
 
 export const initialState: FilmsState = {
 	films: [],
+	favoriteFilmsState: [],
 	film: null,
 	status: Status.pending,
 	isFull: false,
@@ -38,6 +40,6 @@ export const initialState: FilmsState = {
 	ratingLint: RatingLint.Start,
 	isCardSkeleton: false,
 	isValueSearchChange: false,
-	searchWords: [{ value: 'Игра пристолов' }, { value: 'Железный человек' }]
+	searchWords: [{ value: 'Игра пристолов' }, { value: 'Железный человек' }],
 }
 

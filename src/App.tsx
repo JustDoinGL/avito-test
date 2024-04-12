@@ -8,6 +8,8 @@ import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { SingUpPage } from "./pages/SingUpPage/SingUpPage";
 import NotFoundPage from "./pages/404/NotFoundPage";
+import RandomFilmPage from "./pages/RandomFilmPage/RandomFilmPage";
+import FavoritesFilmPage from "./pages/FavoritesFilmPage/FavoritesFilmPage";
 
 function App() {
   const { value: theme } = useAppSelector((state) => state.theme);
@@ -22,7 +24,7 @@ function App() {
             path={`/favorites`}
             element={
               <RequireAuth>
-                <p>favorites</p>
+                <FavoritesFilmPage />
               </RequireAuth>
             }
           />
@@ -30,7 +32,7 @@ function App() {
             path={`/random-film`}
             element={
               <RequireAuth>
-                <p>ffff</p>
+                <RandomFilmPage />
               </RequireAuth>
             }
           />
