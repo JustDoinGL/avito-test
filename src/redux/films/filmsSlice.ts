@@ -1,10 +1,11 @@
 import { initialState } from './films.type'
-import { AgeLint, CountryLint, FilmAgeLint, RatingLint, Status } from '../@types/enum'
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../../helpers/const'
 import { fetchFilms } from './getFilms'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchFilm } from './getFilm'
 import { fetchFilmsFilter } from './getFilterFilms'
 import { fetchSearchFilms } from './getSearchFilms'
+import { Status } from '../@types/enum'
 
 const filmsSlice = createSlice({
 	name: 'films',

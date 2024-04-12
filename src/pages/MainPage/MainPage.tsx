@@ -16,7 +16,7 @@ import {
   CountryLint,
   FilmAgeLint,
   RatingLint,
-} from "../../redux/@types/enum";
+} from "../../helpers/const";
 import { setParams } from "../../redux/films/filmsSlice";
 
 const MainPage = () => {

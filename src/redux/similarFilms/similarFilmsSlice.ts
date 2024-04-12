@@ -3,6 +3,7 @@ import { Status } from '../@types/enum';
 import { fetchSimilarFilms } from './getSimilarFilms';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+
 const similarFilmsSlice = createSlice({
 	name: 'similarFilms',
 	initialState,

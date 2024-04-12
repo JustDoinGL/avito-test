@@ -1,6 +1,8 @@
-import { AgeLint, CountryLint, FilmAgeLint, RatingLint, Status } from '../@types/enum';
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../../helpers/const';
 import { FilmID } from './../../@types/filmId';
 import { Doc } from '../../@types/films'
+import { Status } from '../@types/enum';
+
 
 type FilmsState = {
 	film: FilmID | null

@@ -1,7 +1,7 @@
 import axios, { CancelTokenSource } from 'axios';
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { Films } from '../../@types/films';
-import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../@types/enum';
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../../helpers/const';
 import { getRatingKey, isStart } from '../../helpers/getKey';
 import { RETRIES } from '../../helpers/const';
 
@@ -21,8 +21,8 @@ type fetchFilmsArguments = {
 
 export const fetchFilms = createAsyncThunk<Films, fetchFilmsArguments>(
     'films/fetchFilms',
-    async ({ page = 1, limit = 10, year, ratingYear, city, rating, query='' },
-           { rejectWithValue, dispatch, signal }
+    async ({ page = 1, limit = 10, year, ratingYear, city, rating, query = '' },
+        { rejectWithValue, dispatch, signal }
     ) => {
         const endpoint = query?.length > 0 ? '/search' : '';
         const baseURL = `https://api.kinopoisk.dev/v1.4/movie${endpoint}`;

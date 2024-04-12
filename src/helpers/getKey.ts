@@ -1,4 +1,4 @@
-import { RatingLint } from "../redux/@types/enum";
+import { RatingLint } from "../helpers/const";
 
 export const getRatingKey = (ratingValue: RatingLint | undefined): string | null => {
 

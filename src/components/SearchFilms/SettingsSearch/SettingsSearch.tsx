@@ -3,7 +3,7 @@ import {
   AgeLint,
   CountryLint,
   FilmAgeLint,
-} from "../../../redux/@types/enum";
+} from "../../../helpers/const";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   setAgeFilmLint,

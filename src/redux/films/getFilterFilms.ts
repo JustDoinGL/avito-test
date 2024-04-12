@@ -1,7 +1,7 @@
 import axios, { CancelTokenSource } from 'axios';
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { Films } from '../../@types/films';
-import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../@types/enum';
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../../helpers/const';
 import { getRatingKey, isStart } from '../../helpers/getKey';
 import { RETRIES } from '../../helpers/const';
 
@@ -10,12 +10,12 @@ import { RETRIES } from '../../helpers/const';
 export const cancelFetchFilmsFilter = createAction('films/cancelFetchFilmsFilter');
 
 type fetchFilmsArguments = {
-    page: number;
-    limit: number;
-    year?: FilmAgeLint;
-    ratingYear?: AgeLint;
-    city?: CountryLint;
-    rating?: RatingLint;
+  page: number;
+  limit: number;
+  year?: FilmAgeLint;
+  ratingYear?: AgeLint;
+  city?: CountryLint;
+  rating?: RatingLint;
 }
 
 export const fetchFilmsFilter = createAsyncThunk<Films, fetchFilmsArguments>(
@@ -30,7 +30,7 @@ export const fetchFilmsFilter = createAsyncThunk<Films, fetchFilmsArguments>(
     // signal.onabort = () => {
     //   if(cancelToken) cancelToken.cancel();
     // };
-    
+
     let retries = RETRIES;
     while (retries) {
       try {

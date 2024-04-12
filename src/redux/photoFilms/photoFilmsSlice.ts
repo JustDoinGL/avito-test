@@ -1,7 +1,8 @@
 import { initialState } from './photoFilms.type'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchPhotoFilms } from './getPhotoFilms'
-import { Status } from '../@types/enum'
+import { Status } from '../@types/enum';
+
 
 const photoFilmsSlice = createSlice({
 	name: 'photoFilms',
