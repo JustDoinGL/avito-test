@@ -6,6 +6,7 @@ import reviewsSlice from './reviews/reviewsSlice'
 import seriesSlice from './series/seriesSlice'
 import registrationSlice from './registration/registrationSlice'
 import similarFilmsSlice from './similarFilms/similarFilmsSlice'
+import randomFilmSlice from './randomFilm/randomFilmSlice'
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
 		series: seriesSlice,
 		registration: registrationSlice,
 		similarFilms: similarFilmsSlice,
+		randomFilm: randomFilmSlice,
 	}
 })
 
