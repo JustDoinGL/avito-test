@@ -7,6 +7,7 @@ import store from './redux/store'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from './common/ErrorFallback/ErrorFallback'
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <BrowserRouter>

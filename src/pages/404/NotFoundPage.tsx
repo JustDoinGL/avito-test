@@ -22,7 +22,7 @@ const NotFoundPage = () => {
   }, [navigate])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid='not-found-page'>
       <h1 className={styles.errorCode}>404</h1>
       <p className={styles.errorMessage}>
         Страница не найдена. Вы будете перенаправлены на главную страницу через {countdown} секунд.

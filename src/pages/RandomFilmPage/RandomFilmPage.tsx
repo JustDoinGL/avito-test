@@ -31,7 +31,7 @@ const RandomFilmPage = () => {
   }
 
   return (
-    <div className={`container ${styles.container}`}>
+    <div className={`container ${styles.container}`} data-testid='signup-page'>
       <div className={styles.film}>
         {isSearch && <h3 className='h3'>Мы не смогли найти по вашим запросам. Вот фильм на наше усмотрение</h3>}
         {film ? <CardFilm film={film} /> : <CardFilmSkeleton />}

@@ -3,7 +3,6 @@ import { RandomFilmState, initialState } from './randomFilm.type'
 import { fetchRandomFilm } from './getRandomFilm'
 import { Status } from '../@types/enum'
 import { FilmID } from '../../@types/filmId'
-import { fetchFilm } from '../films/getFilm'
 
 const randomFilmSlice = createSlice({
   name: 'randomFilm',

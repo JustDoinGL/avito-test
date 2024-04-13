@@ -22,7 +22,7 @@ const FilmPage = () => {
 
   if (film && status === 'fulfilled') {
     return (
-      <div className={`container ${styles.film}`}>
+      <div className={`container ${styles.film}`} data-testid='film-page'>
         <FilmHeader
           id={film.id}
           name={film?.name}
@@ -40,7 +40,7 @@ const FilmPage = () => {
   return (
     <>
       {status === 'rejected' && <NotFoundPage />}
-      <div className={`container ${styles.film}`}>{status === 'pending' && <FilmHeaderSkeleton />}</div>
+      <div className={`container ${styles.film}`} data-testid='film-page'>{status === 'pending' && <FilmHeaderSkeleton />}</div>
     </>
   )
 }

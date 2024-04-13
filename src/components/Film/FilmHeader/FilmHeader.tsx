@@ -1,5 +1,5 @@
 import FeaturedContent from '../../../common/FeaturedContent/FeaturedContent'
-import { formatLength } from '../../../helpers/formatLengthMovie'
+import { formatLength } from '../../../helpers/formatLengthMovie/formatLengthMovie'
 import { useWindowWidth } from '../../../hooks/useResize'
 import BackLink from '../../../ui/backLink/BackLink'
 import Img from '../../../ui/img/Img'

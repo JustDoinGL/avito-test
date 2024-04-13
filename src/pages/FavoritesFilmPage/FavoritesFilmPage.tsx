@@ -28,7 +28,7 @@ const FavoritesFilmPage = () => {
   }, [inView])
 
   return (
-    <div className='container'>
+    <div className='container' data-testid='favorites-page'>
       {favoriteFilmsState.map((film) => (
         <CardFilm film={film} key={film.id} />
       ))}

@@ -88,7 +88,7 @@ const MainPage = () => {
   }, [limit, valueSearch, ageFilmLint, ageLint, cityLint, ratingLint])
 
   return (
-    <div className='container'>
+    <div className='container' data-testid='main-page'>
       <SearchMain />
       {status === 'pending' &&
         isCardSkeleton &&
