@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { Carousel, Card, Space, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
@@ -8,6 +8,7 @@ import styles from './SimilarFilmsCard.module.scss'
 import { Skeleton } from '../../../../ui/skeleton/Skeleton'
 import { useWindowWidth } from '../../../../hooks/useResize'
 import { CarouselRef } from 'antd/es/carousel'
+import { setCurrentSlide } from '../../../../redux/similarFilms/similarFilmsSlice'
 
 interface SimilarCardProps {
   similar: similarFilm
@@ -41,9 +42,8 @@ const SimilarCard: React.FC<SimilarCardProps> = ({ similar }) => {
 const SimilarFilmsCard: React.FC = () => {
   const dispatch = useAppDispatch()
   const windowWidth = useWindowWidth()
-  const { page, filmsSimilar, total, content } = useAppSelector((state) => state.similarFilms)
+  const { page, filmsSimilar, total, content, currentSlide } = useAppSelector((state) => state.similarFilms)
   const carouselRef = useRef<CarouselRef>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
 
   const handleLoadMore = async () => {
     if (filmsSimilar.length < total) {
@@ -52,7 +52,7 @@ const SimilarFilmsCard: React.FC = () => {
   }
 
   const handleBeforeChange = useCallback((to: number) => {
-    setCurrentSlide(to)
+    dispatch(setCurrentSlide(to))
   }, [])
 
   const handleChange = async (current: number) => {

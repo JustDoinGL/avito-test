@@ -9,6 +9,7 @@ type SimilarFilmsState = {
   isEnd: boolean
   filmsSimilar: similarFilm[]
   id: string
+  currentSlide: number
   content: string[]
 }
 
@@ -20,5 +21,6 @@ export const initialState: SimilarFilmsState = {
   isEnd: false,
   filmsSimilar: [],
   id: '',
+  currentSlide: 0,
   content: [],
 }

@@ -23,6 +23,9 @@ const similarFilmsSlice = createSlice({
     setContent: (state, action: PayloadAction<string[]>) => {
       state.content = action.payload
     },
+    setCurrentSlide: (state, action: PayloadAction<number>) => {
+      state.currentSlide = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,4 +47,4 @@ const similarFilmsSlice = createSlice({
 
 export default similarFilmsSlice.reducer
 
-export const { resetSimilarFilmsContent, setPage, setContent } = similarFilmsSlice.actions
+export const { resetSimilarFilmsContent, setPage, setContent, setCurrentSlide } = similarFilmsSlice.actions
