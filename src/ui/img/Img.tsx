@@ -1,10 +1,10 @@
-import { ImgProps } from "./Img.type";
-import styles from "./Img.module.scss";
+import { ImgProps } from './Img.type'
+import styles from './Img.module.scss'
 
 const Img = ({ width, height, src, alt, className }: ImgProps) => {
   return (
     <div
-      style={{ width: `${width}px`, height: `${height}px`, background: "grey" }}
+      style={{ width: `${width}px`, height: `${height}px`, background: 'grey' }}
       className={`${styles.image} ${className}`}
     >
       {src ? (
@@ -15,6 +15,6 @@ const Img = ({ width, height, src, alt, className }: ImgProps) => {
         </div>
       )}
     </div>
-  );
-};
-export default Img;
+  )
+}
+export default Img

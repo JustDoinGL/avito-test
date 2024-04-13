@@ -1,53 +1,49 @@
-import { Button, Slider } from "antd";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import {
-  setDate,
-  setSelectedCities,
-  setSelectedGenres,
-} from "../../redux/randomFilm/randomFilmSlice";
-import styles from "./RandomFilmPage.module.scss";
-import TreeSelectContent from "../../ui/treeSelect/TreeSelect";
-import { GenresArray } from "../../helpers/const";
+import { Button, Slider } from 'antd'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { setDate, setSelectedCities, setSelectedGenres } from '../../redux/randomFilm/randomFilmSlice'
+import styles from './RandomFilmPage.module.scss'
+import TreeSelectContent from '../../ui/treeSelect/TreeSelect'
+import { GenresArray } from '../../helpers/const'
+import { fetchRandomFilm } from '../../redux/randomFilm/getRandomFilm'
+import { CardFilm } from '../../components/CardFilm/CardFilm'
 
 const RandomFilmPage = () => {
-  const dispatch = useAppDispatch();
-  const { value: theme } = useAppSelector((state) => state.theme);
-  const { date, selectedCities, selectedGenres } = useAppSelector(
-    (state) => state.randomFilm
-  );
+  const dispatch = useAppDispatch()
+  const { value: theme } = useAppSelector((state) => state.theme)
+  const { date, selectedCities, selectedGenres, film } = useAppSelector((state) => state.randomFilm)
 
   const onSliderChange = (value: number[]) => {
-    dispatch(setDate(value));
-  };
+    dispatch(setDate(value))
+  }
 
   const handleChangeGenres = (value: string[]) => {
-    dispatch(setSelectedGenres(value));
-  };
+    dispatch(setSelectedGenres(value))
+  }
 
   const handleChangeCity = (value: string[]) => {
-    dispatch(setSelectedCities(value));
-  };
+    dispatch(setSelectedCities(value))
+  }
 
   return (
     <div className={`container ${styles.container}`}>
       <div className={styles.select}>
         <TreeSelectContent
           content={GenresArray}
-          placeholder="Выберите жанр"
+          placeholder='Выберите жанр'
           handleChange={handleChangeGenres}
           selectedValues={selectedGenres}
         />
         <TreeSelectContent
           content={GenresArray}
-          placeholder="Выберите Город"
+          placeholder='Выберите Город'
           handleChange={handleChangeCity}
           selectedValues={selectedCities}
         />
       </div>
       <div className={styles.slider}>
         <Slider
-          style={{ maxWidth: 300, width: "100%" }}
-          className={theme === "dark" ? `${styles.dark}` : ""}
+          style={{ maxWidth: 300, width: '100%' }}
+          className={theme === 'dark' ? `${styles.dark}` : ''}
           range
           min={1900}
           max={2024}
@@ -60,9 +56,11 @@ const RandomFilmPage = () => {
         </div>
       </div>
 
-      <Button>Подобрать фильм</Button>
-    </div>
-  );
-};
+      {film && <CardFilm film={film} />}
 
-export default RandomFilmPage;
+      <Button onClick={() => dispatch(fetchRandomFilm())}>Подобрать фильм</Button>
+    </div>
+  )
+}
+
+export default RandomFilmPage

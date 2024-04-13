@@ -1,15 +1,15 @@
-import { Series } from '../../@types/series';
-import { Status } from '../@types/enum';
+import { Series } from '../../@types/series'
+import { Status } from '../@types/enum'
 
 type SeriesState = {
-  status: Status,
+  status: Status
   page: number
   pages: number
   total: number
   isEnd: boolean
   series: Series[]
   id: string
-};
+}
 
 export const initialState: SeriesState = {
   status: Status.fulfilled,
@@ -19,4 +19,4 @@ export const initialState: SeriesState = {
   isEnd: false,
   series: [],
   id: '',
-};
+}

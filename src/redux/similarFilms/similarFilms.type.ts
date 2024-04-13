@@ -1,9 +1,8 @@
-
-import { similarFilm } from '../../@types/similarFilms';
-import { Status } from '../@types/enum';
+import { similarFilm } from '../../@types/similarFilms'
+import { Status } from '../@types/enum'
 
 type SimilarFilmsState = {
-  status: Status,
+  status: Status
   page: number
   pages: number
   total: number
@@ -11,7 +10,7 @@ type SimilarFilmsState = {
   filmsSimilar: similarFilm[]
   id: string
   content: string[]
-};
+}
 
 export const initialState: SimilarFilmsState = {
   status: Status.fulfilled,
@@ -21,5 +20,5 @@ export const initialState: SimilarFilmsState = {
   isEnd: false,
   filmsSimilar: [],
   id: '',
-  content: []
-};
+  content: [],
+}

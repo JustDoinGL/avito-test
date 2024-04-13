@@ -1,5 +1,5 @@
-import { Skeleton } from "../../ui/skeleton/Skeleton";
-import styles from "./CardFilm.module.scss";
+import { Skeleton } from '../../ui/skeleton/Skeleton'
+import styles from './CardFilm.module.scss'
 const CardFilmSkeleton = () => {
   return (
     <div className={styles.card__skeleton}>
@@ -11,7 +11,7 @@ const CardFilmSkeleton = () => {
         <Skeleton width={310} height={77} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardFilmSkeleton;
+export default CardFilmSkeleton

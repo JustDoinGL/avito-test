@@ -1,3 +1,1 @@
-export type SettingsSearchProps = {
-
-}
+export type SettingsSearchProps = {}

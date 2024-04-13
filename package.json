@@ -30,7 +30,11 @@
     "dev": "npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "npm run prettier && npm run lint"
   },
   "eslintConfig": {
     "extends": [
@@ -52,8 +56,14 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.0.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
     "sass": "^1.74.1",
     "style-loader": "^3.3.4"
   }

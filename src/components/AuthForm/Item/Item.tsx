@@ -1,16 +1,8 @@
-import InputText from "../../../ui/inputText/InputText";
-import styles from "./Item.module.scss";
-import { ItemProps } from "./Item.type";
+import InputText from '../../../ui/inputText/InputText'
+import styles from './Item.module.scss'
+import { ItemProps } from './Item.type'
 
-const Item = ({
-  title,
-  helper,
-  value,
-  onChange,
-  type,
-  isRight,
-  placeholder,
-}: ItemProps) => {
+const Item = ({ title, helper, value, onChange, type, isRight, placeholder }: ItemProps) => {
   return (
     <div>
       <p className={styles.title__1111}>{title}</p>
@@ -23,7 +15,7 @@ const Item = ({
         placeholder={placeholder}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Item;
+export default Item

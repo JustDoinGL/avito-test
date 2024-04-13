@@ -1,32 +1,32 @@
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { clearToken } from "../../redux/registration/registrationSlice";
-import { Button } from "antd";
-import styles from "./LoginLogOut.module.scss";
-import { LoginLogOutProps } from "./LoginLogOut.type";
-import { clearFavoriteFilms } from "../../redux/films/filmsSlice";
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { clearToken } from '../../redux/registration/registrationSlice'
+import { Button } from 'antd'
+import styles from './LoginLogOut.module.scss'
+import { LoginLogOutProps } from './LoginLogOut.type'
+import { clearFavoriteFilms } from '../../redux/films/filmsSlice'
 
 const LoginLogOut = ({ onClick }: LoginLogOutProps) => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { token } = useAppSelector((store) => store.registration);
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { token } = useAppSelector((store) => store.registration)
 
   const handleClickExit = () => {
-    dispatch(clearToken());
-    navigate("/");
-    if (onClick) onClick();
-    dispatch(clearFavoriteFilms());
-  };
+    dispatch(clearToken())
+    navigate('/')
+    if (onClick) onClick()
+    dispatch(clearFavoriteFilms())
+  }
 
   const handleClickSignIn = () => {
-    navigate("/login");
-    if (onClick) onClick();
-  };
+    navigate('/login')
+    if (onClick) onClick()
+  }
 
   const handleClickSignUp = () => {
-    navigate("/auth");
-    if (onClick) onClick();
-  };
+    navigate('/auth')
+    if (onClick) onClick()
+  }
   return (
     <>
       {token ? (
@@ -38,7 +38,7 @@ const LoginLogOut = ({ onClick }: LoginLogOutProps) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default LoginLogOut;
+export default LoginLogOut

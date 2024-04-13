@@ -1,23 +1,16 @@
-import { Modal } from "antd";
-import { ModalUIProps } from "./ModalUI.type";
+import { Modal } from 'antd'
+import { ModalUIProps } from './ModalUI.type'
 
-const ModalUI = ({
-  children,
-  open,
-  setIsModalVisible,
-  submitForm,
-  resetFrom,
-  title,
-}: ModalUIProps) => {
+const ModalUI = ({ children, open, setIsModalVisible, submitForm, resetFrom, title }: ModalUIProps) => {
   const handleOk = () => {
-    submitForm();
-    setIsModalVisible(false);
-  };
+    submitForm()
+    setIsModalVisible(false)
+  }
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-    resetFrom();
-  };
+    setIsModalVisible(false)
+    resetFrom()
+  }
 
   return (
     <>
@@ -25,7 +18,7 @@ const ModalUI = ({
         {children}
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ModalUI;
+export default ModalUI

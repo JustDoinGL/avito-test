@@ -1,29 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef } from "react";
-import qs from "qs";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchFilms } from "../../redux/films/getFilms";
-import { CardFilm } from "../../components/CardFilm/CardFilm";
-import { useInView } from "react-intersection-observer";
-import LoaderError from "../../ui/loaderError/LoaderError";
-import CardFilmSkeleton from "../../components/CardFilm/CardFilmSkeleton";
-import SearchMain from "../../components/SearchFilms/SearchFilms";
-import ButtonTop from "../../ui/buttonTop/ButtonTop";
-import { useNavigate } from "react-router-dom";
-import { getRatingKey, isStart } from "../../helpers/getKey";
-import {
-  AgeLint,
-  CountryLint,
-  FilmAgeLint,
-  RatingLint,
-} from "../../helpers/const";
-import { setParams } from "../../redux/films/filmsSlice";
+import { useEffect, useRef } from 'react'
+import qs from 'qs'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { fetchFilms } from '../../redux/films/getFilms'
+import { CardFilm } from '../../components/CardFilm/CardFilm'
+import { useInView } from 'react-intersection-observer'
+import LoaderError from '../../ui/loaderError/LoaderError'
+import CardFilmSkeleton from '../../components/CardFilm/CardFilmSkeleton'
+import SearchMain from '../../components/SearchFilms/SearchFilms'
+import ButtonTop from '../../ui/buttonTop/ButtonTop'
+import { useNavigate } from 'react-router-dom'
+import { getRatingKey, isStart } from '../../helpers/getKey'
+import { AgeLint, CountryLint, FilmAgeLint, RatingLint } from '../../helpers/const'
+import { setParams } from '../../redux/films/filmsSlice'
 
 const MainPage = () => {
-  const { ref, inView } = useInView();
-  const isMounted = useRef(false);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const { ref, inView } = useInView()
+  const isMounted = useRef(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const {
     films,
     status,
@@ -36,45 +31,30 @@ const MainPage = () => {
     cityLint,
     ratingLint,
     isFull,
-  } = useAppSelector((state) => state.films);
+  } = useAppSelector((state) => state.films)
 
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      dispatch(setParams(params));
+      const params = qs.parse(window.location.search.substring(1))
+      dispatch(setParams(params))
       dispatch(
         fetchFilms({
           page: Number(params.page) || 1,
           limit: Number(params.limit) || 10,
-          query:
-            params?.valueSearch?.length === 0
-              ? ""
-              : (params.valueSearch as string),
-          rating:
-            params.ratingLint?.length === 0
-              ? RatingLint.Start
-              : (params.ratingLint as RatingLint),
-          ratingYear:
-            params.ageLint?.length === 0
-              ? AgeLint.Start
-              : (params.ageLint as AgeLint),
-          year:
-            params.ageFilmLint?.length === 0
-              ? FilmAgeLint.Start
-              : (params.ageFilmLint as FilmAgeLint),
-          city:
-            params.cityLint?.length === 0
-              ? CountryLint.Start
-              : (params.cityLint as CountryLint),
-        })
-      );
+          query: params?.valueSearch?.length === 0 ? '' : (params.valueSearch as string),
+          rating: params.ratingLint?.length === 0 ? RatingLint.Start : (params.ratingLint as RatingLint),
+          ratingYear: params.ageLint?.length === 0 ? AgeLint.Start : (params.ageLint as AgeLint),
+          year: params.ageFilmLint?.length === 0 ? FilmAgeLint.Start : (params.ageFilmLint as FilmAgeLint),
+          city: params.cityLint?.length === 0 ? CountryLint.Start : (params.cityLint as CountryLint),
+        }),
+      )
     } else {
-      films.length === 0 && dispatch(fetchFilms({ page: 1, limit: 10 }));
+      films.length === 0 && dispatch(fetchFilms({ page: 1, limit: 10 }))
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    if (inView && !isFull && status !== "rejected") {
+    if (inView && !isFull && status !== 'rejected') {
       dispatch(
         fetchFilms({
           page: page,
@@ -84,11 +64,11 @@ const MainPage = () => {
           year: ageFilmLint,
           ratingYear: ageLint,
           rating: ratingLint,
-        })
-      );
+        }),
+      )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
+  }, [inView])
 
   useEffect(() => {
     if (isMounted.current) {
@@ -100,30 +80,26 @@ const MainPage = () => {
         ageLint: isStart(ageLint, AgeLint.Start),
         cityLint: isStart(cityLint, CountryLint.Start),
         ratingLint: getRatingKey(ratingLint),
-      });
-      navigate(`?${queryString}`);
+      })
+      navigate(`?${queryString}`)
     }
-    isMounted.current = true;
+    isMounted.current = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, valueSearch, ageFilmLint, ageLint, cityLint, ratingLint]);
+  }, [limit, valueSearch, ageFilmLint, ageLint, cityLint, ratingLint])
 
   return (
-    <div className="container">
+    <div className='container'>
       <SearchMain />
-      {status === "pending" &&
+      {status === 'pending' &&
         isCardSkeleton &&
-        Array.from({ length: 10 }).map((_, index) => (
-          <CardFilmSkeleton key={index} />
-        ))}
-      {films?.map((film) => (
-        <CardFilm film={film} key={film.id} />
-      ))}
+        Array.from({ length: 10 }).map((_, index) => <CardFilmSkeleton key={index} />)}
+      {films?.map((film) => <CardFilm film={film} key={film.id} />)}
       <ButtonTop />
-      <div ref={ref} className="loader">
+      <div ref={ref} className='loader'>
         <LoaderError status={status} isFull={isFull} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainPage;
+export default MainPage

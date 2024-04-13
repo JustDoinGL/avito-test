@@ -1,3 +1,1 @@
-export type SearchFilmsProps = {
-  
-}
+export type SearchFilmsProps = {}

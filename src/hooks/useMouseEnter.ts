@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 export const useMouseEnter = () => {
-  const [isHovering, setIsHovering] = useState(false);
+  const [isHovering, setIsHovering] = useState(false)
 
   const handleMouseEnter = () => {
-    setIsHovering(true);
-  };
+    setIsHovering(true)
+  }
 
   const handleMouseLeave = () => {
-    setIsHovering(false);
-  };
+    setIsHovering(false)
+  }
 
-  return { isHovering, handleMouseEnter, handleMouseLeave };
+  return { isHovering, handleMouseEnter, handleMouseLeave }
 }
-

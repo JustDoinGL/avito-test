@@ -1,4 +1,3 @@
-
 export interface TSimilarFilms {
   docs: similarFilm[]
   total: number

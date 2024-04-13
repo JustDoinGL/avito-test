@@ -9,16 +9,16 @@ import similarFilmsSlice from './similarFilms/similarFilmsSlice'
 import randomFilmSlice from './randomFilm/randomFilmSlice'
 
 const store = configureStore({
-	reducer: {
-		theme: themeReducer,
-		films: filmsReducer,
-		photoFilms: photoFilmsSlice,
-		reviews: reviewsSlice,
-		series: seriesSlice,
-		registration: registrationSlice,
-		similarFilms: similarFilmsSlice,
-		randomFilm: randomFilmSlice,
-	}
+  reducer: {
+    theme: themeReducer,
+    films: filmsReducer,
+    photoFilms: photoFilmsSlice,
+    reviews: reviewsSlice,
+    series: seriesSlice,
+    registration: registrationSlice,
+    similarFilms: similarFilmsSlice,
+    randomFilm: randomFilmSlice,
+  },
 })
 
 export default store

@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import { Photo } from "../../@types/photoFilms"
+import { ReactNode } from 'react'
+import { Photo } from '../../@types/photoFilms'
 
 export type CarouselComponentProps = {
   content: Photo[]

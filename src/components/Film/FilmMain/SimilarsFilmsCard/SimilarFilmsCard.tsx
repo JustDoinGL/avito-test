@@ -1,81 +1,72 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import { Carousel, Card, Space, Button } from "antd";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
-import { fetchSimilarFilms } from "../../../../redux/similarFilms/getSimilarFilms";
-import { similarFilm } from "../../../../@types/similarFilms";
-import styles from "./SimilarFilmsCard.module.scss";
-import { Skeleton } from "../../../../ui/skeleton/Skeleton";
-import { useWindowWidth } from "../../../../hooks/useResize";
-import { CarouselRef } from "antd/es/carousel";
+import React, { useState, useRef, useCallback, useEffect } from 'react'
+import { Carousel, Card, Space, Button } from 'antd'
+import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
+import { fetchSimilarFilms } from '../../../../redux/similarFilms/getSimilarFilms'
+import { similarFilm } from '../../../../@types/similarFilms'
+import styles from './SimilarFilmsCard.module.scss'
+import { Skeleton } from '../../../../ui/skeleton/Skeleton'
+import { useWindowWidth } from '../../../../hooks/useResize'
+import { CarouselRef } from 'antd/es/carousel'
 
 interface SimilarCardProps {
-  similar: similarFilm;
+  similar: similarFilm
 }
 
 const SimilarCard: React.FC<SimilarCardProps> = ({ similar }) => {
-  const windowWidth = useWindowWidth();
+  const windowWidth = useWindowWidth()
   return (
     <Card
       className={styles.card}
       style={{
-        width: windowWidth <= 768 ? "100vw" : 300,
+        width: windowWidth <= 768 ? '100vw' : 300,
         height: 350,
-        margin: "0 auto",
+        margin: '0 auto',
       }}
     >
       <Link to={`/film/${similar.id}`}>
-        <Space direction="vertical" size="large" align="center">
+        <Space direction='vertical' size='large' align='center'>
           {similar.poster.url ? (
-            <img
-              alt={`Poster for ${similar.name}`}
-              src={similar.poster.url}
-              style={{ maxHeight: 250 }}
-            />
+            <img alt={`Poster for ${similar.name}`} src={similar.poster.url} style={{ maxHeight: 250 }} />
           ) : (
             <Skeleton width={300} height={450} />
           )}
-          <Card.Meta
-            title={similar.name}
-            description={`${similar.movieLength} min`}
-          />
+          <Card.Meta title={similar.name} description={`${similar.movieLength} min`} />
         </Space>
       </Link>
     </Card>
-  );
-};
+  )
+}
 
 const SimilarFilmsCard: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const windowWidth = useWindowWidth();
-  const { page, filmsSimilar, total, content } = useAppSelector(
-    (state) => state.similarFilms
-  );
-  const carouselRef = useRef<CarouselRef>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const dispatch = useAppDispatch()
+  const windowWidth = useWindowWidth()
+  const { page, filmsSimilar, total, content } = useAppSelector((state) => state.similarFilms)
+  const carouselRef = useRef<CarouselRef>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const handleLoadMore = async () => {
     if (filmsSimilar.length < total) {
-      await dispatch(fetchSimilarFilms({ page: page + 1, similar: content }));
+      await dispatch(fetchSimilarFilms({ page: page + 1, similar: content }))
     }
-  };
+  }
 
   const handleBeforeChange = useCallback((to: number) => {
-    setCurrentSlide(to);
-  }, []);
+    setCurrentSlide(to)
+  }, [])
 
   const handleChange = async (current: number) => {
     if (current >= filmsSimilar.length - 4 && filmsSimilar.length < total) {
-      await handleLoadMore();
+      await handleLoadMore()
     } else {
-      setCurrentSlide(current);
+      setCurrentSlide(current)
     }
-  };
+  }
 
-  const handlePrev = () => carouselRef.current?.prev();
-  const handleNext = () => carouselRef.current?.next();
+  const handlePrev = () => carouselRef.current?.prev()
+  const handleNext = () => carouselRef.current?.next()
 
-  const filteredFilms = filmsSimilar.slice(1);
+  const filteredFilms = filmsSimilar.slice(1)
 
   return (
     <div className={styles.container}>
@@ -84,11 +75,10 @@ const SimilarFilmsCard: React.FC = () => {
         beforeChange={handleBeforeChange}
         afterChange={handleChange}
         ref={carouselRef}
-        
-        
         className={styles.carousel}
         style={{
-          width: "100vw",
+          width: '100%',
+          maxWidth: '90vw',
           height: 400,
         }}
         autoplay={true}
@@ -108,7 +98,7 @@ const SimilarFilmsCard: React.FC = () => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SimilarFilmsCard;
+export default SimilarFilmsCard

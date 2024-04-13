@@ -1,21 +1,20 @@
-import { FC, ReactElement } from "react";
-import { useLocation, Navigate } from "react-router-dom";
-import { useAppSelector } from "../hooks/redux";
+import { FC, ReactElement } from 'react'
+import { useLocation, Navigate } from 'react-router-dom'
+import { useAppSelector } from '../hooks/redux'
 
 interface NeedAuthProps {
-  children: ReactElement;
+  children: ReactElement
 }
 
 const NeedAuth: FC<NeedAuthProps> = ({ children }) => {
-  const location = useLocation();
-  const { token } = useAppSelector(store => store.registration);
+  const location = useLocation()
+  const { token } = useAppSelector((store) => store.registration)
 
   if (token) {
-    return <Navigate to="/catalog" state={{ from: location }} replace />;
+    return <Navigate to='/catalog' state={{ from: location }} replace />
   }
 
-  return children;
-};
+  return children
+}
 
-export { NeedAuth };
-
+export { NeedAuth }

@@ -1,4 +1,4 @@
-import { FilmID } from "../../../../@types/filmId"
+import { FilmID } from '../../../../@types/filmId'
 
 export type ActorsCardProps = {
   film: FilmID

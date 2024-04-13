@@ -1,21 +1,21 @@
-import { Routes, Route } from "react-router-dom";
-import { useAppSelector } from "./hooks/redux";
-import DefaultLayout from "./layouts/DefaultLayout";
-import MainPage from "./pages/MainPage/MainPage";
-import FilmPage from "./pages/FilmPage/FilmPage";
-import { NeedAuth } from "./hoc/NeedAuth";
-import { RequireAuth } from "./hoc/RequireAuth";
-import { AuthPage } from "./pages/AuthPage/AuthPage";
-import { SingUpPage } from "./pages/SingUpPage/SingUpPage";
-import NotFoundPage from "./pages/404/NotFoundPage";
-import RandomFilmPage from "./pages/RandomFilmPage/RandomFilmPage";
-import FavoritesFilmPage from "./pages/FavoritesFilmPage/FavoritesFilmPage";
+import { Routes, Route } from 'react-router-dom'
+import { useAppSelector } from './hooks/redux'
+import DefaultLayout from './layouts/DefaultLayout'
+import MainPage from './pages/MainPage/MainPage'
+import FilmPage from './pages/FilmPage/FilmPage'
+import { NeedAuth } from './hoc/NeedAuth'
+import { RequireAuth } from './hoc/RequireAuth'
+import { AuthPage } from './pages/AuthPage/AuthPage'
+import { SingUpPage } from './pages/SingUpPage/SingUpPage'
+import NotFoundPage from './pages/404/NotFoundPage'
+import RandomFilmPage from './pages/RandomFilmPage/RandomFilmPage'
+import FavoritesFilmPage from './pages/FavoritesFilmPage/FavoritesFilmPage'
 
 function App() {
-  const { value: theme } = useAppSelector((state) => state.theme);
+  const { value: theme } = useAppSelector((state) => state.theme)
 
   return (
-    <div className={`body ${theme === "dark" ? "dark-theme" : "light-theme"} `}>
+    <div className={`body ${theme === 'dark' ? 'dark-theme' : 'light-theme'} `}>
       <Routes>
         <Route path={`/`} element={<DefaultLayout />}>
           <Route index element={<MainPage />} />
@@ -38,7 +38,7 @@ function App() {
           />
 
           <Route
-            path="/auth"
+            path='/auth'
             element={
               <NeedAuth>
                 <AuthPage />
@@ -47,7 +47,7 @@ function App() {
           />
 
           <Route
-            path="/login"
+            path='/login'
             element={
               <NeedAuth>
                 <SingUpPage />
@@ -56,10 +56,10 @@ function App() {
           />
         </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

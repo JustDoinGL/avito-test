@@ -1,19 +1,14 @@
-import { TreeSelect } from "antd";
-import { TreeSelectProps } from "./TreeSelect.type";
-const { TreeNode } = TreeSelect;
+import { TreeSelect } from 'antd'
+import { TreeSelectProps } from './TreeSelect.type'
+const { TreeNode } = TreeSelect
 
-const TreeSelectContent = ({
-  content,
-  placeholder,
-  selectedValues,
-  handleChange,
-}: TreeSelectProps) => {
+const TreeSelectContent = ({ content, placeholder, selectedValues, handleChange }: TreeSelectProps) => {
   return (
     <TreeSelect
       showSearch={false}
-      style={{ maxWidth: 300, width: "100%" }}
+      style={{ maxWidth: 300, width: '100%' }}
       value={selectedValues}
-      dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+      dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
       placeholder={placeholder}
       multiple
       treeCheckable
@@ -23,7 +18,7 @@ const TreeSelectContent = ({
         <TreeNode value={element} title={element} key={index} />
       ))}
     </TreeSelect>
-  );
-};
+  )
+}
 
-export default TreeSelectContent;
+export default TreeSelectContent

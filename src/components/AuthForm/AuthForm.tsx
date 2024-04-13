@@ -1,71 +1,51 @@
-import { FormEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchRegistration } from "../../redux/registration/getRegistration";
-import styles from "./AuthForm.module.scss";
-import Item from "./Item/Item";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  isLoading,
-  setAddNewUser,
-  setIsWrongPassOrLogin,
-} from "../../redux/registration/registrationSlice";
-import { Status } from "../../redux/@types/enum";
-import { useFormControls } from "../../hooks/useFormControls";
-import { Modal } from "antd";
-import { Loading3QuartersOutlined } from "@ant-design/icons";
-import ErrorMessage from "../../ui/errorMessage/ErrorMessage";
-import { AuthFormProps } from "./AuthForm.type";
+import { FormEvent } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { fetchRegistration } from '../../redux/registration/getRegistration'
+import styles from './AuthForm.module.scss'
+import Item from './Item/Item'
+import { Link, useNavigate } from 'react-router-dom'
+import { isLoading, setAddNewUser, setIsWrongPassOrLogin } from '../../redux/registration/registrationSlice'
+import { Status } from '../../redux/@types/enum'
+import { useFormControls } from '../../hooks/useFormControls'
+import { Modal } from 'antd'
+import { Loading3QuartersOutlined } from '@ant-design/icons'
+import ErrorMessage from '../../ui/errorMessage/ErrorMessage'
+import { AuthFormProps } from './AuthForm.type'
 
 const AuthForm = ({ form }: AuthFormProps) => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const {
-    disabled,
-    email,
-    password,
-    status,
-    usersLogin,
-    isWrongPasswordOrLogin,
-  } = useAppSelector((state) => state.registration);
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const { disabled, email, password, status, usersLogin, isWrongPasswordOrLogin } = useAppSelector(
+    (state) => state.registration,
+  )
 
   const handleSubmit = (e: FormEvent) => {
-    dispatch(isLoading());
-    e.preventDefault();
-    if (form === "registration") {
-      dispatch(fetchRegistration({ email, password }));
-      dispatch(setAddNewUser({ login: email, password }));
-      navigate("/", { replace: true });
-    } else if (
-      usersLogin.some(
-        (user) => user.login === email && user.password === password
-      )
-    ) {
-      dispatch(fetchRegistration({ email, password }));
-      navigate("/", { replace: true });
+    dispatch(isLoading())
+    e.preventDefault()
+    if (form === 'registration') {
+      dispatch(fetchRegistration({ email, password }))
+      dispatch(setAddNewUser({ login: email, password }))
+      navigate('/', { replace: true })
+    } else if (usersLogin.some((user) => user.login === email && user.password === password)) {
+      dispatch(fetchRegistration({ email, password }))
+      navigate('/', { replace: true })
     } else {
-      dispatch(setIsWrongPassOrLogin(true));
+      dispatch(setIsWrongPassOrLogin(true))
     }
-  };
+  }
 
-  const inputFields = useFormControls(form);
+  const inputFields = useFormControls(form)
 
   return (
     <>
-      <form className={styles.form} typeof="submit">
+      <form className={styles.form} typeof='submit'>
         <div className={styles.header}>
-          <h1 className={styles.title}>
-            {form === "registration" ? "Регистрация" : "Вход"}
-          </h1>
-          <Link
-            to={form === "registration" ? "/login" : "/auth"}
-            className="link"
-          >
-            {form === "registration" ? "Есть аккаунт" : "Зарегестрироваться"}
+          <h1 className={styles.title}>{form === 'registration' ? 'Регистрация' : 'Вход'}</h1>
+          <Link to={form === 'registration' ? '/login' : '/auth'} className='link'>
+            {form === 'registration' ? 'Есть аккаунт' : 'Зарегестрироваться'}
           </Link>
         </div>
-        {status === Status.rejected && (
-          <ErrorMessage errorMessage={"Произошла ошибка"} />
-        )}
+        {status === Status.rejected && <ErrorMessage errorMessage={'Произошла ошибка'} />}
 
         {inputFields.map((field, index) => (
           <Item
@@ -80,16 +60,10 @@ const AuthForm = ({ form }: AuthFormProps) => {
           />
         ))}
 
-        {isWrongPasswordOrLogin && (
-          <ErrorMessage errorMessage="Неправильная почта или пароль" />
-        )}
+        {isWrongPasswordOrLogin && <ErrorMessage errorMessage='Неправильная почта или пароль' />}
 
-        <button
-          className={styles.button}
-          onClick={handleSubmit}
-          disabled={disabled}
-        >
-          {form === "registration" ? "Зарегистрироваться" : "Войти"}
+        <button className={styles.button} onClick={handleSubmit} disabled={disabled}>
+          {form === 'registration' ? 'Зарегистрироваться' : 'Войти'}
         </button>
       </form>
 
@@ -99,7 +73,7 @@ const AuthForm = ({ form }: AuthFormProps) => {
         </Modal>
       )}
     </>
-  );
-};
+  )
+}
 
-export default AuthForm;
+export default AuthForm

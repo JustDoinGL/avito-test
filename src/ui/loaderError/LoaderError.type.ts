@@ -1,4 +1,4 @@
-import { Status } from "../../redux/@types/enum"
+import { Status } from '../../redux/@types/enum'
 
 export type LoaderErrorProps = {
   status: Status

@@ -1,31 +1,31 @@
-import styles from "./CardFilm.module.scss";
-import { CardFilmProps } from "./CardFilm.type";
-import RateStar from "../../ui/rateStar/RateStar";
-import { Link } from "react-router-dom";
-import Img from "../../ui/img/Img";
-import { useWindowWidth } from "../../hooks/useResize";
-import { useAppDispatch } from "../../hooks/redux";
-import { setIsValueSearchChange } from "../../redux/films/filmsSlice";
-import FeaturedContent from "../../common/FeaturedContent/FeaturedContent";
-import { useMouseEnter } from "../../hooks/useMouseEnter";
+import styles from './CardFilm.module.scss'
+import { CardFilmProps } from './CardFilm.type'
+import RateStar from '../../ui/rateStar/RateStar'
+import { Link } from 'react-router-dom'
+import Img from '../../ui/img/Img'
+import { useWindowWidth } from '../../hooks/useResize'
+import { useAppDispatch } from '../../hooks/redux'
+import { setIsValueSearchChange } from '../../redux/films/filmsSlice'
+import FeaturedContent from '../../common/FeaturedContent/FeaturedContent'
+import { useMouseEnter } from '../../hooks/useMouseEnter'
 
 export const CardFilm = ({ film }: CardFilmProps) => {
-  const width = useWindowWidth();
-  const dispatch = useAppDispatch();
-  const { handleMouseEnter, handleMouseLeave, isHovering } = useMouseEnter();
+  const width = useWindowWidth()
+  const dispatch = useAppDispatch()
+  const { handleMouseEnter, handleMouseLeave, isHovering } = useMouseEnter()
 
   return (
     <>
       <Link
         to={`/film/${film.id}`}
-        className={`${styles.filmCard} ${isHovering ? styles.hover : ""}`}
+        className={`${styles.filmCard} ${isHovering ? styles.hover : ''}`}
         onClick={() => dispatch(setIsValueSearchChange(false))}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <Img
           src={film.poster.url}
-          alt={film?.name || ""}
+          alt={film?.name || ''}
           className={styles.filmCard__image}
           width={width > 420 ? 310 : 240}
           height={width > 420 ? 465 : 360}
@@ -36,16 +36,10 @@ export const CardFilm = ({ film }: CardFilmProps) => {
           <FeaturedContent id={film.id} />
         </div>
 
-        <p className={styles.filmCard__description}>
-          {film.shortDescription && film.shortDescription}
-        </p>
-        <p className={styles.filmCard__description}>
-          {film.year && `Дата выхода - ${film.year}`}
-        </p>
+        <p className={styles.filmCard__description}>{film.shortDescription && film.shortDescription}</p>
+        <p className={styles.filmCard__description}>{film.year && `Дата выхода - ${film.year}`}</p>
         {film.countries && film.countries[0] && film.countries[0].name && (
-          <p className={styles.filmCard__description}>
-            {`Город - ${film.countries[0].name}`}
-          </p>
+          <p className={styles.filmCard__description}>{`Город - ${film.countries[0].name}`}</p>
         )}
         {film.rating && film.rating.kp && (
           <div className={styles.filmCard__rating}>
@@ -55,5 +49,5 @@ export const CardFilm = ({ film }: CardFilmProps) => {
         )}
       </Link>
     </>
-  );
-};
+  )
+}

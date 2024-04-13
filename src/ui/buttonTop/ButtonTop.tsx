@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
-import styles from "./ButtonTop.module.scss";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { useState, useEffect } from 'react'
+import styles from './ButtonTop.module.scss'
+import { ArrowUpOutlined } from '@ant-design/icons'
 
 const ButtonTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
-    });
-  };
+      behavior: 'smooth',
+    })
+  }
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
+        setIsVisible(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility)
 
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
-  
+    return () => window.removeEventListener('scroll', toggleVisibility)
+  }, [])
+
   return (
     <>
       {isVisible ? (
@@ -36,7 +36,7 @@ const ButtonTop = () => {
         </div>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default ButtonTop;
+export default ButtonTop

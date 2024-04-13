@@ -1,30 +1,26 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchFilm } from "../../redux/films/getFilm";
-import styles from "./FilmPage.module.scss";
-import {
-  FilmHeader,
-  FilmHeaderSkeleton,
-  FilmMain,
-} from "../../components/Film";
-import NotFoundPage from "../404/NotFoundPage";
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { fetchFilm } from '../../redux/films/getFilm'
+import styles from './FilmPage.module.scss'
+import { FilmHeader, FilmHeaderSkeleton, FilmMain } from '../../components/Film'
+import NotFoundPage from '../404/NotFoundPage'
 
 const FilmPage = () => {
-  const { id } = useParams();
-  const dispatch = useAppDispatch();
-  const { film, status } = useAppSelector((state) => state.films);
+  const { id } = useParams()
+  const dispatch = useAppDispatch()
+  const { film, status } = useAppSelector((state) => state.films)
 
   useEffect(() => {
     if (id) {
       dispatch(fetchFilm({ id })).then(() => {
-        window.scrollTo(0, 0);
-      });
+        window.scrollTo(0, 0)
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id])
 
-  if (film && status === "fulfilled") {
+  if (film && status === 'fulfilled') {
     return (
       <div className={`container ${styles.film}`}>
         <FilmHeader
@@ -39,15 +35,13 @@ const FilmPage = () => {
         />
         <FilmMain film={film} id={id} />
       </div>
-    );
+    )
   }
   return (
     <>
-      {status === "rejected" && <NotFoundPage />}
-      <div className={`container ${styles.film}`}>
-        {status === "pending" && <FilmHeaderSkeleton />}
-      </div>
+      {status === 'rejected' && <NotFoundPage />}
+      <div className={`container ${styles.film}`}>{status === 'pending' && <FilmHeaderSkeleton />}</div>
     </>
-  );
-};
-export default FilmPage;
+  )
+}
+export default FilmPage

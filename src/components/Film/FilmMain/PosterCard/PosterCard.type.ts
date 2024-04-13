@@ -1,5 +1,5 @@
-import { Review } from "../../../../@types/reviews"
+import { Review } from '../../../../@types/reviews'
 
-export type PosterCardProps =  {
+export type PosterCardProps = {
   comment: Review
 }

@@ -1,14 +1,14 @@
-import { Review } from '../../@types/reviews';
-import { Status } from '../@types/enum';
+import { Review } from '../../@types/reviews'
+import { Status } from '../@types/enum'
 
 type RegistrationState = {
-  status: Status,
+  status: Status
   page: number
   pages: number
   isEnd: boolean
   comments: Review[]
   id: string
-};
+}
 
 export const initialState: RegistrationState = {
   status: Status.fulfilled,
@@ -17,4 +17,4 @@ export const initialState: RegistrationState = {
   isEnd: false,
   comments: [],
   id: '',
-};
+}
