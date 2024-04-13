@@ -7,8 +7,11 @@ let cancelToken: CancelTokenSource
 
 export const cancelFetchFilm = createAction('films/cancelFetchFilm')
 
-const makeRequest = async () => {
-  const response = await axios.get(`https://api.kinopoisk.dev/v1.4/movie/random`, {
+const makeRequest = async ({ selectedContent, selectedGenres, date }: fetchRandomFilmProps) => {
+  const genresParamsCities = selectedContent.map((city) => `type=%2B${encodeURIComponent(city)}`).join('&')
+  const genresParamsDate = `&releaseYears.end=${date[0]}-${date[1]}`
+  const genresParamsGenres = selectedGenres.map((genre) => `genres.name=%2B${encodeURIComponent(genre)}`).join('&')
+  const response = await axios.get(`https://api.kinopoisk.dev/v1.4/movie/random?${genresParamsGenres}&${genresParamsCities}&${genresParamsDate}`, {
     headers: {
       'X-API-KEY': process.env.REACT_APP_TOKEN,
       Accept: 'application/json',
@@ -19,9 +22,15 @@ const makeRequest = async () => {
   return response.data
 }
 
-export const fetchRandomFilm = createAsyncThunk<FilmID>(
+type fetchRandomFilmProps = {
+  selectedGenres: string[]
+  selectedContent: string[]
+  date: number[]
+}
+
+export const fetchRandomFilm = createAsyncThunk<FilmID, fetchRandomFilmProps>(
   'randomFilm/fetchRandomFilm',
-  async (_, { rejectWithValue, dispatch, signal }) => {
+  async ({ selectedContent, selectedGenres, date }, { rejectWithValue, dispatch, signal }) => {
     if (cancelToken) cancelToken.cancel()
 
     cancelToken = axios.CancelToken.source()
@@ -33,7 +42,7 @@ export const fetchRandomFilm = createAsyncThunk<FilmID>(
     let retries = RETRIES
     while (retries) {
       try {
-        const response = await makeRequest()
+        const response = await makeRequest({ selectedContent, selectedGenres, date })
         return response
       } catch (error) {
         if (axios.isCancel(error)) {

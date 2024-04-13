@@ -3,4 +3,5 @@ export type TreeSelectProps = {
   content: string[]
   selectedValues: string[]
   handleChange: (value: string[]) => void
+  multiple: boolean
 }

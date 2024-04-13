@@ -12,8 +12,13 @@
   }
 }
 
+.film {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .container {
-  height: 80vh;
   padding: 20px;
   justify-content: center;
   align-items: center;
