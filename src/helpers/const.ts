@@ -66,4 +66,4 @@ export const GenresArray = [
   'фэнтези',
 ]
 
-export const NameContentArray = ["movie", "tv-series", "cartoon", "anime", "animated-series"]
+export const NameContentArray = ['movie', 'tv-series', 'cartoon', 'anime', 'animated-series']

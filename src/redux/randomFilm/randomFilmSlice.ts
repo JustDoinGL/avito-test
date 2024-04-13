@@ -10,15 +10,15 @@ const randomFilmSlice = createSlice({
   initialState,
   reducers: {
     setDate: (state, action: PayloadAction<number[]>) => {
-      state.date = action.payload;
+      state.date = action.payload
     },
     setSelectedGenres: (state, action: PayloadAction<string[]>) => {
-      state.selectedGenres = action.payload;
+      state.selectedGenres = action.payload
     },
     setSelectedContent: (state, action: PayloadAction<string[]>) => {
       state.selectedContent = []
       if (action.payload.length > 0) {
-        state.selectedContent.push(action.payload[action.payload.length - 1]);
+        state.selectedContent.push(action.payload[action.payload.length - 1])
       }
     },
     setIsSearch: (state, action: PayloadAction<boolean>) => {
@@ -28,22 +28,22 @@ const randomFilmSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchRandomFilm.pending, (state: RandomFilmState) => {
-        state.status = Status.pending;
+        state.status = Status.pending
       })
       .addCase(fetchRandomFilm.fulfilled, (state: RandomFilmState, action: PayloadAction<FilmID>) => {
         if (action.payload === null) {
           state.isSearch = true
           fetchRandomFilm({ date: [], selectedContent: [], selectedGenres: [] })
         }
-        state.film = action.payload;
-        state.status = Status.fulfilled;
+        state.film = action.payload
+        state.status = Status.fulfilled
       })
       .addCase(fetchRandomFilm.rejected, (state: RandomFilmState) => {
-        state.status = Status.rejected;
-      });
+        state.status = Status.rejected
+      })
   },
-});
+})
 
-export default randomFilmSlice.reducer;
+export default randomFilmSlice.reducer
 
-export const { setDate, setSelectedContent, setSelectedGenres, setIsSearch } = randomFilmSlice.actions;
+export const { setDate, setSelectedContent, setSelectedGenres, setIsSearch } = randomFilmSlice.actions

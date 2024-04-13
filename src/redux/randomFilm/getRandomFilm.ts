@@ -11,13 +11,16 @@ const makeRequest = async ({ selectedContent, selectedGenres, date }: fetchRando
   const genresParamsCities = selectedContent.map((city) => `type=%2B${encodeURIComponent(city)}`).join('&')
   const genresParamsDate = `&releaseYears.end=${date[0]}-${date[1]}`
   const genresParamsGenres = selectedGenres.map((genre) => `genres.name=%2B${encodeURIComponent(genre)}`).join('&')
-  const response = await axios.get(`https://api.kinopoisk.dev/v1.4/movie/random?${genresParamsGenres}&${genresParamsCities}&${genresParamsDate}`, {
-    headers: {
-      'X-API-KEY': process.env.REACT_APP_TOKEN,
-      Accept: 'application/json',
+  const response = await axios.get(
+    `https://api.kinopoisk.dev/v1.4/movie/random?${genresParamsGenres}&${genresParamsCities}&${genresParamsDate}`,
+    {
+      headers: {
+        'X-API-KEY': process.env.REACT_APP_TOKEN,
+        Accept: 'application/json',
+      },
+      cancelToken: cancelToken.token,
     },
-    cancelToken: cancelToken.token,
-  })
+  )
 
   return response.data
 }

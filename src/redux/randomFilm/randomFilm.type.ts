@@ -1,5 +1,5 @@
-import { FilmID } from "../../@types/filmId"
-import { Status } from "../@types/enum"
+import { FilmID } from '../../@types/filmId'
+import { Status } from '../@types/enum'
 
 export type RandomFilmState = {
   date: number[]

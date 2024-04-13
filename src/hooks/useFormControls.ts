@@ -1,11 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import {
-  setDisabled,
-  setEmail,
-  setName,
-  setPassword,
-  setPassword2,
-} from '../redux/registration/registrationSlice'
+import { setDisabled, setEmail, setName, setPassword, setPassword2 } from '../redux/registration/registrationSlice'
 import { useAppDispatch, useAppSelector } from './redux'
 import { TForm } from '../components/AuthForm/AuthForm.type'
 
