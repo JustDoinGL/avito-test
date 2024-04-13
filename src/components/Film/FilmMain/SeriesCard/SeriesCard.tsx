@@ -12,7 +12,7 @@ const EpisodeCard: React.FC<{ episodes: Episode[] }> = ({ episodes }) => (
   <Collapse accordion defaultActiveKey={['1']}>
     {episodes.map((episode, index) => (
       <Panel header={episode.name} key={index}>
-        <h3 className='h3'>{episode.enName}</h3>
+        <h3 className='h3'>{episode.name}</h3>
         <p>{episode.description}</p>
       </Panel>
     ))}

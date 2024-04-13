@@ -8,7 +8,7 @@ const reviewsSlice = createSlice({
   initialState,
   reducers: {
     resetReviewsContent: (state, action: PayloadAction<string>) => {
-      if (state.id === action.payload) {
+      if (state.id !== action.payload) {
         state.comments = []
       } else {
         state.id = action.payload

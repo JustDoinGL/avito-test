@@ -8,7 +8,7 @@ const seriesSlice = createSlice({
   initialState,
   reducers: {
     resetSeriesContent: (state, action: PayloadAction<string>) => {
-      if (state.id === action.payload) {
+      if (state.id !== action.payload) {
         state.series = []
         state.page = 1
       } else {

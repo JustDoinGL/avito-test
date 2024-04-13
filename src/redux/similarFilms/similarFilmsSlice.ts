@@ -8,7 +8,7 @@ const similarFilmsSlice = createSlice({
   initialState,
   reducers: {
     resetSimilarFilmsContent: (state, action: PayloadAction<string>) => {
-      if (state.id === action.payload) {
+      if (state.id !== action.payload) {
         state.filmsSimilar = []
         state.page = 1
       } else {

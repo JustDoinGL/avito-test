@@ -24,14 +24,14 @@ const SimilarCard: React.FC<SimilarCardProps> = ({ similar }) => {
         margin: '0 auto',
       }}
     >
-      <Link to={`/film/${similar.id}`}>
+      <Link to={`/film/${similar.id}`} className={styles.link}>
         <Space direction='vertical' size='large' align='center'>
           {similar.poster.url ? (
             <img alt={`Poster for ${similar.name}`} src={similar.poster.url} style={{ maxHeight: 250 }} />
           ) : (
-            <Skeleton width={300} height={450} />
+            <Skeleton width={300} height={150} />
           )}
-          <Card.Meta title={similar.name} description={`${similar.movieLength} min`} />
+          <h2 className='h2'>{similar.name}</h2>
         </Space>
       </Link>
     </Card>
@@ -71,32 +71,38 @@ const SimilarFilmsCard: React.FC = () => {
   return (
     <div className={styles.container}>
       <h2 className='h2'>Похожий контент</h2>
-      <Carousel
-        beforeChange={handleBeforeChange}
-        afterChange={handleChange}
-        ref={carouselRef}
-        className={styles.carousel}
-        style={{
-          width: '100%',
-          maxWidth: '90vw',
-          height: 400,
-        }}
-        autoplay={true}
-        slidesToShow={windowWidth > 1024 ? 3 : windowWidth > 768 ? 2 : 1}
-        initialSlide={currentSlide}
-      >
-        {filteredFilms.map((similar) => (
-          <SimilarCard key={similar.id} similar={similar} />
-        ))}
-      </Carousel>
-      <div className={styles.button}>
-        <Button onClick={handlePrev} className={styles.button}>
-          Назад
-        </Button>
-        <Button onClick={handleNext} className={styles.button}>
-          Вперед
-        </Button>
-      </div>
+      {filteredFilms.length > 0 ? (
+        <>
+          <Carousel
+            beforeChange={handleBeforeChange}
+            afterChange={handleChange}
+            ref={carouselRef}
+            className={styles.carousel}
+            style={{
+              width: '100%',
+              maxWidth: '90vw',
+              height: 400,
+            }}
+            autoplay={true}
+            slidesToShow={windowWidth > 1024 ? 3 : windowWidth > 768 ? 2 : 1}
+            initialSlide={currentSlide}
+          >
+            {filteredFilms.map((similar) => (
+              <SimilarCard key={similar.id} similar={similar} />
+            ))}
+          </Carousel>
+          <div className={styles.button}>
+            <Button onClick={handlePrev} className={styles.button}>
+              Назад
+            </Button>
+            <Button onClick={handleNext} className={styles.button}>
+              Вперед
+            </Button>
+          </div>
+        </>
+      ) : (
+        <h2 className='h2'>Ничего не найдено</h2>
+      )}
     </div>
   )
 }

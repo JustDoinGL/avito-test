@@ -22,7 +22,6 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
   const dispatch = useAppDispatch()
   const { ref, inView } = useInView()
 
-  const { page: pagePhoto } = useAppSelector((state) => state.photoFilms)
   const { page: pageSimilarFilms } = useAppSelector((state) => state.similarFilms)
   const { page: pageReviews, comments, pages, status, isEnd } = useAppSelector((state) => state.reviews)
   const { pages: pagesSeries } = useAppSelector((state) => state.series)
@@ -35,10 +34,10 @@ const FilmMain = ({ film, id }: FilmMainProps) => {
       dispatch(resetSeriesContent(id))
       dispatch(resetReviewsContent(id))
       dispatch(resetSimilarFilmsContent(id))
-      dispatch(fetchPhotoFilms({ id: id, page: pagePhoto }))
+      dispatch(fetchPhotoFilms({ id: id, page: 1 }))
       dispatch(fetchSeries({ id: id, page: 1 }))
-      dispatch(fetchReviews({ id: id, page: pageReviews }))
-      dispatch(fetchSimilarFilms({ similar, page: pageSimilarFilms }))
+      dispatch(fetchReviews({ id: id, page: 1 }))
+      dispatch(fetchSimilarFilms({ similar, page: 1 }))
 
       dispatch(setContent(similar))
     }

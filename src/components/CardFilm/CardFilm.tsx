@@ -13,41 +13,41 @@ export const CardFilm = ({ film }: CardFilmProps) => {
   const width = useWindowWidth()
   const dispatch = useAppDispatch()
   const { handleMouseEnter, handleMouseLeave, isHovering } = useMouseEnter()
+  const { name, poster, shortDescription, year, countries, rating } = film
+  const filmRating = rating?.kp
 
   return (
-    <>
-      <Link
-        to={`/film/${film.id}`}
-        className={`${styles.filmCard} ${isHovering ? styles.hover : ''}`}
-        onClick={() => dispatch(setIsValueSearchChange(false))}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Img
-          src={film.poster.url}
-          alt={film?.name || ''}
-          className={styles.filmCard__image}
-          width={width > 420 ? 310 : 240}
-          height={width > 420 ? 465 : 360}
-        />
-        <h2 className={styles.filmCard__title}>{film.name}</h2>
+    <Link
+      to={`/film/${film.id}`}
+      className={`${styles.filmCard} ${isHovering ? styles.hover : ''}`}
+      onClick={() => dispatch(setIsValueSearchChange(false))}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Img
+        src={poster.url}
+        alt={name || ''}
+        className={styles.filmCard__image}
+        width={width > 420 ? 310 : 240}
+        height={width > 420 ? 465 : 360}
+      />
 
-        <div onMouseEnter={handleMouseLeave} onMouseLeave={handleMouseEnter}>
-          <FeaturedContent id={film.id} />
+      <h2 className={styles.filmCard__title}>{name}</h2>
+      <div onMouseEnter={handleMouseLeave} onMouseLeave={handleMouseEnter}>
+        <FeaturedContent id={film.id} />
+      </div>
+
+      {shortDescription && <p className={styles.filmCard__description}>{shortDescription}</p>}
+      {year && <p className={styles.filmCard__description}>{`Дата выхода - ${year}`}</p>}
+
+      {countries?.[0]?.name && <p className={styles.filmCard__description}>{`Город - ${countries[0].name}`}</p>}
+
+      {filmRating && (
+        <div className={styles.filmCard__rating}>
+          Рейтинг: {filmRating.toFixed(1)}
+          <RateStar rate={filmRating} />
         </div>
-
-        <p className={styles.filmCard__description}>{film.shortDescription && film.shortDescription}</p>
-        <p className={styles.filmCard__description}>{film.year && `Дата выхода - ${film.year}`}</p>
-        {film.countries && film.countries[0] && film.countries[0].name && (
-          <p className={styles.filmCard__description}>{`Город - ${film.countries[0].name}`}</p>
-        )}
-        {film.rating && film.rating.kp && (
-          <div className={styles.filmCard__rating}>
-            Рейтинг: {film.rating.kp.toFixed(1)}
-            <RateStar rate={film.rating.kp} />
-          </div>
-        )}
-      </Link>
-    </>
+      )}
+    </Link>
   )
 }

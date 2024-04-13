@@ -14,7 +14,7 @@ const photoFilmsSlice = createSlice({
       state.photo = []
     },
     resetPhotoContent: (state, action: PayloadAction<string>) => {
-      if (state.id === action.payload) {
+      if (state.id !== action.payload) {
         state.photo = []
       } else {
         state.id = action.payload

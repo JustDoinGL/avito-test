@@ -10,7 +10,7 @@ const AuthPage = () => {
     dispatch(clearToken())
   }
   return (
-    <div className={styles.container} data-testid='auth-page' >
+    <div className={styles.container} data-testid='auth-page'>
       <div className={styles.form}>
         <BackLink onBack={handleClick} back={'/'} />
         <AuthForm form='registration' />

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import store from './redux/store'
 import App from './App'
 import { ReactNode } from 'react'
-import 'intersection-observer';
+import 'intersection-observer'
 
 export const renderWithRouter = (ui: ReactNode, { route = '/' } = {}) => {
   return render(

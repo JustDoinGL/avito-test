@@ -67,7 +67,6 @@ const MainPage = () => {
         }),
       )
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
 
   useEffect(() => {
@@ -84,7 +83,6 @@ const MainPage = () => {
       navigate(`?${queryString}`)
     }
     isMounted.current = true
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, valueSearch, ageFilmLint, ageLint, cityLint, ratingLint])
 
   return (

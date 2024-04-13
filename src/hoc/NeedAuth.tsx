@@ -11,7 +11,7 @@ const NeedAuth: FC<NeedAuthProps> = ({ children }) => {
   const { token } = useAppSelector((store) => store.registration)
 
   if (token) {
-    return <Navigate to='/catalog' state={{ from: location }} replace />
+    return <Navigate to='/' state={{ from: location }} replace />
   }
 
   return children
