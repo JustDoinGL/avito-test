@@ -32,7 +32,6 @@ const randomFilmSlice = createSlice({
       .addCase(fetchRandomFilm.fulfilled, (state: RandomFilmState, action: PayloadAction<FilmID>) => {
         if (action.payload === null) {
           state.isSearch = true
-          fetchRandomFilm({ date: [], selectedContent: [], selectedGenres: [] })
         }
         state.film = action.payload
         state.status = Status.fulfilled

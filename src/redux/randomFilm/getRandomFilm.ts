@@ -8,9 +8,13 @@ let cancelToken: CancelTokenSource
 export const cancelFetchFilm = createAction('films/cancelFetchFilm')
 
 const makeRequest = async ({ selectedContent, selectedGenres, date }: fetchRandomFilmProps) => {
-  const genresParamsCities = selectedContent.map((city) => `type=%2B${encodeURIComponent(city)}`).join('&')
-  const genresParamsDate = `&releaseYears.end=${date[0]}-${date[1]}`
-  const genresParamsGenres = selectedGenres.map((genre) => `genres.name=%2B${encodeURIComponent(genre)}`).join('&')
+  const genresParamsCities =
+    selectedContent.length > 0 ? selectedContent?.map((city) => `type=%2B${encodeURIComponent(city)}`).join('&') : ''
+  const genresParamsDate = date.length > 0 ? `&releaseYears.end=${date[0]}-${date[1]}` : ''
+  const genresParamsGenres =
+    selectedGenres.length > 0
+      ? selectedGenres.map((genre) => `genres.name=%2B${encodeURIComponent(genre)}`).join('&')
+      : ''
   const response = await axios.get(
     `https://api.kinopoisk.dev/v1.4/movie/random?${genresParamsGenres}&${genresParamsCities}&${genresParamsDate}`,
     {

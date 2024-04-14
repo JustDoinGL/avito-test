@@ -7,11 +7,25 @@ import { GenresArray, NameContentArray } from '../../helpers/const'
 import { fetchRandomFilm } from '../../redux/randomFilm/getRandomFilm'
 import { CardFilm } from '../../components/CardFilm/CardFilm'
 import CardFilmSkeleton from '../../components/CardFilm/CardFilmSkeleton'
+import { Status } from '../../redux/@types/enum'
+import { useEffect } from 'react'
 
 const RandomFilmPage = () => {
   const dispatch = useAppDispatch()
   const { value: theme } = useAppSelector((state) => state.theme)
-  const { date, selectedContent, selectedGenres, film, isSearch } = useAppSelector((state) => state.randomFilm)
+  const { date, selectedContent, selectedGenres, film, isSearch, status } = useAppSelector((state) => state.randomFilm)
+
+  useEffect(() => {
+    if (!film && status === Status.fulfilled) {
+      dispatch(
+        fetchRandomFilm({
+          date: [],
+          selectedContent: [],
+          selectedGenres: [],
+        }),
+      )
+    }
+  }, [film, dispatch, status])
 
   const onSliderChange = (value: number[]) => {
     dispatch(setDate(value))
@@ -34,7 +48,7 @@ const RandomFilmPage = () => {
     <div className={`container ${styles.container}`} data-testid='signup-page'>
       <div className={styles.film}>
         {isSearch && <h3 className='h3'>Мы не смогли найти по вашим запросам. Вот фильм на наше усмотрение</h3>}
-        {film ? <CardFilm film={film} /> : <CardFilmSkeleton />}
+        {film && status !== 'pending' ? <CardFilm film={film} /> : <CardFilmSkeleton />}
       </div>
       <div className={styles.select}>
         <TreeSelectContent
@@ -68,7 +82,11 @@ const RandomFilmPage = () => {
         </div>
       </div>
 
-      <Button onClick={buttonClick}>Подобрать фильм</Button>
+      <div className={styles.button}>
+        <Button style={{ width: 300 }} onClick={buttonClick}>
+          Подобрать фильм
+        </Button>
+      </div>
     </div>
   )
 }
